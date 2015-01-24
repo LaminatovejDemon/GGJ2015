@@ -24,7 +24,9 @@ public class Sentence : MonoBehaviour
 		public Condition _Condition;
 	}
 
-	public string _Label;
+	[SerializeField]
+	public List<string> _Labels;
+	public List<bool> _LargeLabels;
 
 	[SerializeField]
 	public List<NextSentence> _NextSentenceList;
@@ -68,16 +70,8 @@ public class Sentence : MonoBehaviour
 		
 		if ( _SentencePhase == SentencePhase.Pending && Camera.main.WorldToViewportPoint(transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f)).x < 1.0f )
 		{
-			if ( _NextSentenceList.Count > 0 )
-			{
-				_SentencePhase = SentencePhase.WaitingForInteraction;
-				TextManager.Get().OnSentenceTrigger(this);
-			}
-			else 
-			{
-				TextManager.Get().ChoiceSelected(null);
-				Leave();
-			}
+			_SentencePhase = SentencePhase.WaitingForInteraction;
+			TextManager.Get().OnSentenceTrigger(this);
 		}
 		else if ( _SentencePhase == SentencePhase.Leaving && Camera.main.WorldToViewportPoint(transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f)).x < 0.0f )
 		{

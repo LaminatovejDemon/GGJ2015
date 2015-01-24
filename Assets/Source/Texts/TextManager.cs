@@ -7,21 +7,27 @@ public class TextManager : MonoBehaviour
 	public Choice _ChoiceTemplate;
 	public Sentence _FirstSentence;
 	public Font _FontTemplate;
+	public float _LargeFontSize;
+	public float _SmallFontSize;
 	public float _TextSpeedMultiplier = 1.0f;
 	public List<Choice> _VisibleChoices;
 	public List<Transform> _ChoicePositions;
 
 	Sentence _ActualSentence;
+	Sentence _ActualTemplate;
+	int _ActualSentencePartIndex;
 
 	private static TextManager _Instance;
 
-	void CreateSentence(Sentence target)
+	void CreateSentence(Sentence targetTemplate, int index = 0)
 	{
-		_ActualSentence = GameObject.Instantiate(target) as Sentence;
+		_ActualTemplate = targetTemplate;
+		_ActualSentence = GameObject.Instantiate(targetTemplate) as Sentence;
 		TextMesh text_ = _ActualSentence.gameObject.AddComponent<TextMesh>();
 		text_.font = _FontTemplate;
-		text_.text = _ActualSentence._Label;
-		text_.characterSize = 0.125f;
+		_ActualSentencePartIndex = index;
+		text_.text = _ActualSentence._Labels[_ActualSentencePartIndex];
+		text_.characterSize = targetTemplate._LargeLabels[_ActualSentencePartIndex] ? 0.125f : 0.045f;
 		text_.anchor = TextAnchor.MiddleLeft;
 		text_.color = Color.black;
 		_ActualSentence._Speed = 0.2f * _TextSpeedMultiplier;
@@ -49,7 +55,20 @@ public class TextManager : MonoBehaviour
 
 	public void OnSentenceTrigger(Sentence source)
 	{
-		StartCoroutine(DisplayChoices(source._NextSentenceList));
+		if ( _ActualSentence._Labels.Count > _ActualSentencePartIndex + 1)
+		{
+			source.Leave();
+			CreateSentence(_ActualTemplate, _ActualSentencePartIndex+1);
+		}
+		else if ( source._NextSentenceList.Count == 0 )
+		{
+			source.Leave();
+			CreateSentence(_FirstSentence);
+		}
+		else 
+		{
+			StartCoroutine(DisplayChoices(source._NextSentenceList));
+		}
 	}
 
 	void DisplayChoice(Sentence.NextSentence item, List<Transform> placesList)
@@ -123,17 +142,11 @@ public class TextManager : MonoBehaviour
 	{
 		_ActualSentence.Leave();
 
-		if ( target == null )
-		{
-			CreateSentence(_FirstSentence);
-		}
-		else
-		{
-			StartCoroutine(HideActualChoicesBut(target));
-			target.animation.Play("ChoiceSelect");
-			target.DestroyWhenAnimationDone();
-			CreateSentence(target._parentSentence._Target);
-		}
+		StartCoroutine(HideActualChoicesBut(target));
+		target.animation.Play("ChoiceSelect");
+		target.DestroyWhenAnimationDone();
+		CreateSentence(target._parentSentence._Target);
+
 	}
 
 }
