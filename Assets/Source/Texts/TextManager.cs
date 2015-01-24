@@ -26,7 +26,7 @@ public class TextManager : MonoBehaviour
 		text_.font = _FontTemplate;
 		_ActualSentencePartIndex = index;
 		text_.text = _ActualSentence._Labels[_ActualSentencePartIndex];
-		text_.characterSize = targetTemplate._LargeLabels[_ActualSentencePartIndex] ? 0.125f : 0.045f;
+		text_.characterSize = targetTemplate._LargeLabels[_ActualSentencePartIndex] ? _LargeFontSize : _SmallFontSize;
 		text_.anchor = TextAnchor.MiddleLeft;
 		text_.color = Color.black;
 		_ActualSentence._Speed = 0.2f * _TextSpeedMultiplier;
