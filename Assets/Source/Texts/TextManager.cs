@@ -55,19 +55,23 @@ public class TextManager : MonoBehaviour
 
 	public void OnSentenceTrigger(Sentence source)
 	{
+		List<Sentence.NextSentence> _choicesList = new List<Sentence.NextSentence>(source._NextSentenceList);
+		
+		ScoreManager.Get().FilterChoices(_choicesList);
+
 		if ( _ActualSentence._Labels.Count > _ActualSentencePartIndex + 1)
 		{
 			source.Leave();
 			CreateSentence(_ActualTemplate, _ActualSentencePartIndex+1);
 		}
-		else if ( source._NextSentenceList.Count == 0 )
+		else if ( _choicesList.Count == 0 )
 		{
 			source.Leave();
 			CreateSentence(_FirstSentence);
 		}
 		else 
 		{
-			StartCoroutine(DisplayChoices(source._NextSentenceList));
+			StartCoroutine(DisplayChoices(_choicesList));
 		}
 	}
 
@@ -97,13 +101,10 @@ public class TextManager : MonoBehaviour
 	IEnumerator DisplayChoices(List<Sentence.NextSentence> choices)
 	{
 		List<Transform> _choicesPlaces = new List<Transform>(_ChoicePositions);
-		List<Sentence.NextSentence> _choicesList = new List<Sentence.NextSentence>(choices);
 
-		ScoreManager.Get().FilterChoices(_choicesList);
-
-		for ( int i = 0; i < Mathf.Min(3, _choicesList.Count); ++i )
+		for ( int i = 0; i < Mathf.Min(3, choices.Count); ++i )
 		{
-			DisplayChoice(_choicesList[i], _choicesPlaces);
+			DisplayChoice(choices[i], _choicesPlaces);
 			yield return new WaitForSeconds(0.5f / ((float)i+1));
 		}
 

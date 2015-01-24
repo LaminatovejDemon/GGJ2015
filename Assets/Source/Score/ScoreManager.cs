@@ -68,7 +68,7 @@ public class ScoreManager : MonoBehaviour
 		int maskValue = (int)conditionMask;
 		while ( (maskValue & 1) == 0 )
 		{
-			maskValue <<= 1;
+			maskValue >>= 1;
 			++index_;
 		}
 
@@ -88,6 +88,11 @@ public class ScoreManager : MonoBehaviour
 			{
 				Debug.Log ("Removing choice " + choicesList[i]._Condition._ConditionType + " since it's forbidden " + choicesList[i]._Target.name);
 				choicesList.RemoveAt(i);
+				if ( choicesList.Count == 0 )
+				{
+					return;
+				}
+
 				--i;
 			}
 		}
