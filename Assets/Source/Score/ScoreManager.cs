@@ -86,7 +86,6 @@ public class ScoreManager : MonoBehaviour
 		{
 			if ( (_ForbiddenChoicesMask & (int)choicesList[i]._Condition._ConditionType) > 0 )
 			{
-				Debug.Log ("Removing choice " + choicesList[i]._Condition._ConditionType + " since it's forbidden " + choicesList[i]._Target.name);
 				choicesList.RemoveAt(i);
 				if ( choicesList.Count == 0 )
 				{
@@ -95,11 +94,6 @@ public class ScoreManager : MonoBehaviour
 
 				--i;
 			}
-		}
-
-		for ( int i = 0; i < choicesList.Count; ++i)
-		{
-			Debug.Log ("Stays " + choicesList[i]._Condition._ConditionType + " with name " + choicesList[i]._Target.name);
 		}
 	}
 }

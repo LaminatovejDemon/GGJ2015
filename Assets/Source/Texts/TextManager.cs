@@ -152,7 +152,7 @@ public class TextManager : MonoBehaviour
 	public void ChoiceSelected(Choice target)
 	{
 		_ActualSentence.Leave();
-
+		ColorManager.Get().SetMood(target._parentSentence._Condition._ScoreType);
 		StartCoroutine(HideActualChoicesBut(target));
 		target.GetComponent<Animator>().SetBool("Select", true);
 		CreateSentence(target._parentSentence._Target);
