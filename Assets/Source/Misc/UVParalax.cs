@@ -8,7 +8,7 @@ public class UVParalax : MonoBehaviour
 	
 	void Start()
 	{
-		renderer.material.mainTextureScale = new Vector2(Camera.main.aspect, 1.0f);
+		renderer.material.mainTextureScale = new Vector2(Camera.main.aspect * renderer.material.mainTextureScale.x, renderer.material.mainTextureScale.y);
 	}
 	
 	void Update()
