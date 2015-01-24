@@ -96,11 +96,14 @@ public class TextManager : MonoBehaviour
 
 	IEnumerator DisplayChoices(List<Sentence.NextSentence> choices)
 	{
-		List<Transform> _choicesList = new List<Transform>(_ChoicePositions);
+		List<Transform> _choicesPlaces = new List<Transform>(_ChoicePositions);
+		List<Sentence.NextSentence> _choicesList = new List<Sentence.NextSentence>(choices);
 
-		for ( int i = 0; i < Mathf.Min(3, choices.Count); ++i )
+		ScoreManager.Get().FilterChoices(_choicesList);
+
+		for ( int i = 0; i < Mathf.Min(3, _choicesList.Count); ++i )
 		{
-			DisplayChoice(choices[i], _choicesList);
+			DisplayChoice(_choicesList[i], _choicesPlaces);
 			yield return new WaitForSeconds(0.5f / ((float)i+1));
 		}
 
@@ -144,7 +147,6 @@ public class TextManager : MonoBehaviour
 		StartCoroutine(HideActualChoicesBut(target));
 		target.GetComponent<Animator>().SetBool("Select", true);
 		CreateSentence(target._parentSentence._Target);
-
 	}
 
 }

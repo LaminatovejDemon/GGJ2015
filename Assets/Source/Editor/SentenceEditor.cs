@@ -55,7 +55,7 @@ public class SentenceEditor : Editor
 			{
 				m_Data._NextSentenceList[i]._Condition = new Condition();
 			}
-			m_Data._NextSentenceList[i]._Condition._ConditionType = (Condition.ConditionType)EditorGUILayout.EnumPopup(m_Data._NextSentenceList[i]._Condition._ConditionType);
+			m_Data._NextSentenceList[i]._Condition._ConditionType = (ScoreManager.ConditionType)EditorGUILayout.EnumPopup(m_Data._NextSentenceList[i]._Condition._ConditionType);
 			EditorGUILayout.EndHorizontal();
 		}
 		ShowListControllers(m_Data._NextSentenceList);

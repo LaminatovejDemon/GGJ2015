@@ -22,8 +22,11 @@ public class Choice : MonoBehaviour
 			return;
 		}
 		
-		if ( phase == TouchPhase.Ended && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ChoiceIdle") )
+		if ( phase == TouchPhase.Ended && 
+		    (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ChoiceIdle")) ||
+		 	(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ChoiceShow")) )
 		{
+			ScoreManager.Get().AddScore(_parentSentence._Condition._ConditionType);
 			TextManager.Get().ChoiceSelected(this);
 		}
 	}

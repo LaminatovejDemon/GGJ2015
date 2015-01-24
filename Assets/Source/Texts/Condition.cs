@@ -4,16 +4,6 @@ using System.Collections;
 [System.Serializable]
 public class Condition
 {
-	public enum ConditionType
-	{
-		Invalid,
-		Random,
-		Agressive,
-		Protective,
-		Cheerful,
-		Questioning,
-		Reasonbable,
-	}
-
-	public ConditionType _ConditionType;
+	public ScoreManager.ConditionType _ConditionType;
+	public ScoreManager.ScoreType _ScoreType;
 }
