@@ -14,18 +14,38 @@ public class TextManager : MonoBehaviour
 	public List<Choice> _VisibleChoices;
 	public List<Transform> _ChoicePositions;
 
+	int _Row = 0;
+
 	Sentence _ActualSentence;
 	Sentence _ActualTemplate;
 	int _ActualSentencePartIndex;
+	public float _PreviousSpeed;
+
+	public enum SpeedChange
+	{
+		Let,
+		Raise,
+		Reset,
+	}
 
 	private static TextManager _Instance;
 
-	void CreateSentence(Sentence targetTemplate, int index = 0)
+	void CreateSentence(Sentence targetTemplate, int index, SpeedChange speedChange)
 	{
+		Debug.Log ("Raise speed is " + speedChange);
 		if ( targetTemplate == null )
 		{
 			_EndGame = true;
 			return;
+		}
+
+		if ( _ActualTemplate == null )
+		{
+			_PreviousSpeed = 1.0f;
+		}
+		else
+		{
+			_PreviousSpeed = _ActualTemplate._MaxSpeed;
 		}
 
 		_ActualTemplate = targetTemplate;
@@ -34,19 +54,44 @@ public class TextManager : MonoBehaviour
 		text_.font = _FontTemplate;
 		_ActualSentencePartIndex = index;
 		text_.text = _ActualSentence._Labels[_ActualSentencePartIndex];
-		text_.characterSize = targetTemplate._LargeLabels[_ActualSentencePartIndex] ? _LargeFontSize : _SmallFontSize;
+
+		bool largeFont_ = targetTemplate._LargeLabels[_ActualSentencePartIndex];
+		text_.characterSize = largeFont_ ? _LargeFontSize : _SmallFontSize;
 		text_.anchor = TextAnchor.MiddleLeft;
 		text_.color = Color.black;
-		_ActualSentence._Speed = 0.2f * _TextSpeedMultiplier;
+
+		switch ( speedChange )
+		{
+		case SpeedChange.Let:
+			_ActualSentence._MaxSpeed = _PreviousSpeed;
+			break;
+		case SpeedChange.Raise:
+			_ActualSentence._MaxSpeed = _PreviousSpeed + 1;
+			break;
+		case SpeedChange.Reset:
+			_ActualSentence._MaxSpeed = 1.0f;
+			break;
+		}
+
 		_ActualSentence.GetComponent<MeshRenderer>().material = _FontTemplate.material;
 		_ActualSentence.transform.parent = transform;
+
+		Vector3 localPosition_ = _ActualSentence.transform.localPosition;
+
+			int change = Random.Range(0, 2) * 2 - 1;
+			_Row += change;
+			_Row %= 3;
+
+		localPosition_.y = -_Row * 2.0f;
+		_ActualSentence.transform.localPosition = localPosition_;
+		
 	}
 
 	void Update()
 	{
 		if ( _ActualSentence == null && _EndGame != true )
 		{
-			CreateSentence(ChapterManager.Get().GetEpisode());
+			CreateSentence(ChapterManager.Get().GetEpisode(), 0, TextManager.SpeedChange.Let);
 		}
 	}
 
@@ -70,12 +115,12 @@ public class TextManager : MonoBehaviour
 		if ( _ActualSentence._Labels.Count > _ActualSentencePartIndex + 1)
 		{
 			source.Leave();
-			CreateSentence(_ActualTemplate, _ActualSentencePartIndex+1);
+			CreateSentence(_ActualTemplate, _ActualSentencePartIndex+1, TextManager.SpeedChange.Raise);
 		}
 		else if ( _choicesList.Count == 0 )
 		{
 			source.Leave();
-			CreateSentence(ChapterManager.Get().GetEpisode());
+			CreateSentence(ChapterManager.Get().GetEpisode(), 0, TextManager.SpeedChange.Reset);
 		}
 		else 
 		{
@@ -155,7 +200,7 @@ public class TextManager : MonoBehaviour
 		ColorManager.Get().SetMood(target._parentSentence._Condition._ScoreType);
 		StartCoroutine(HideActualChoicesBut(target));
 		target.GetComponent<Animator>().SetBool("Select", true);
-		CreateSentence(target._parentSentence._Target);
+		CreateSentence(target._parentSentence._Target, 0, TextManager.SpeedChange.Raise);
 	}
 
 }

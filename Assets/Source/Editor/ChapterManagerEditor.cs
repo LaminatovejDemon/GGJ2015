@@ -58,6 +58,7 @@ public class ChapterManagerEditor : Editor
 			EditorGUILayout.BeginVertical(_Style);
 			EditorGUILayout.LabelField("Act " + (i+1));
 
+			m_Data._Chapters[i]._Random = EditorGUILayout.Toggle("Random Chapter", m_Data._Chapters[i]._Random);
 			for ( int j = 0; j < m_Data._Chapters[i]._Chapter.Count; ++j )
 			{
 				m_Data._Chapters[i]._Chapter[j] = EditorGUILayout.ObjectField(m_Data._Chapters[i]._Chapter[j], typeof(Sentence), false ) as Sentence;

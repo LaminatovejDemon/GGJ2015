@@ -12,6 +12,8 @@ public class ChapterManager : MonoBehaviour
 	{
 		[SerializeField]
 		public List<Sentence> _Chapter;
+
+		public bool _Random;
 	};
 
 	[SerializeField]
@@ -42,7 +44,7 @@ public class ChapterManager : MonoBehaviour
 			return null;
 		}
 
-		int targetIndex_ = Random.Range(0, _Chapters[_CurrentChapter]._Chapter.Count);
+		int targetIndex_ = _Chapters[_CurrentChapter]._Random ? Random.Range(0, _Chapters[_CurrentChapter]._Chapter.Count) : 0;
 
 		Sentence ret_ = _Chapters[_CurrentChapter]._Chapter[targetIndex_];
 
