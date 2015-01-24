@@ -15,7 +15,7 @@ public class Sentence : MonoBehaviour
 		Finished,
 	}
 
-	SentencePhase _SentencePhase;
+	SentencePhase _SentencePhase = SentencePhase.Pending;
 
 	[System.Serializable]
 	public class NextSentence
@@ -32,27 +32,23 @@ public class Sentence : MonoBehaviour
 	public List<NextSentence> _NextSentenceList;
 	
 	public float _Speed;
-	public float _MaxSpeed;
-	float _RealSpeed;
-	
-	void OnEnable()
-	{
-		Reset();
-	}
+	public float _MaxSpeed = 1.0f;
+	float _RealSpeed = 1.0f;
 
 	public void Leave()
 	{
 		_SentencePhase = SentencePhase.Leaving;
 	}
 	
-	void Reset()
+	public void Init()
 	{
 		Vector3 defaultPos_ = transform.position;
 		Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, 0.0f));
 		defaultPos_.x = pos.x;
 		transform.position = defaultPos_;
+		_MaxSpeed = 1.0f;
+		_RealSpeed = 1.0f;
 		_SentencePhase = SentencePhase.Pending;
-		_RealSpeed = _MaxSpeed;
 	}
 	
 	void Update()
@@ -73,8 +69,16 @@ public class Sentence : MonoBehaviour
 		}
 	
 		transform.localPosition += Vector3.left * Time.deltaTime * 5.0f * _RealSpeed * _Speed;
+
+		float lastSpeedRatio_ = _MaxSpeed;
+		Sentence previous_ = TextManager.Get()._PreviousInstance;
+		if ( previous_ != null )
+		{
+			lastSpeedRatio_ = _MaxSpeed / previous_._MaxSpeed;
+		}
 		
-		if ( _SentencePhase == SentencePhase.Pending && Camera.main.WorldToViewportPoint(transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f)).x < 1.0f + (_MaxSpeed - TextManager.Get()._PreviousSpeed) )
+		if ( _SentencePhase == SentencePhase.Pending && Camera.main.WorldToViewportPoint(transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f)).x
+		    < lastSpeedRatio_ )
 		{
 			_SentencePhase = SentencePhase.WaitingForInteraction;
 			TextManager.Get().OnSentenceTrigger(this);
