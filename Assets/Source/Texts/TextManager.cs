@@ -7,7 +7,10 @@ public class TextManager : MonoBehaviour
 	public Choice _ChoiceTemplate;
 	public Sentence _FirstSentence;
 	public Font _FontTemplate;
+	public float _TextSpeedMultiplier = 1.0f;
+
 	public List<Transform> _ChoicePositions;
+
 	Sentence _ActualSentence;
 
 	private static TextManager _Instance;
@@ -23,9 +26,10 @@ public class TextManager : MonoBehaviour
 			text_.characterSize = 0.125f;
 			text_.anchor = TextAnchor.MiddleLeft;
 			text_.color = Color.black;
-			_ActualSentence._Speed = 0.2f;
+			_ActualSentence._Speed = 0.2f * _TextSpeedMultiplier;
 			_ActualSentence.GetComponent<MeshRenderer>().material = _FontTemplate.material;
 			_ActualSentence.transform.parent = transform;
+
 		}
 	}
 
@@ -56,6 +60,12 @@ public class TextManager : MonoBehaviour
 
 			choiceInstance_.transform.parent = GetChoicePosition(_choicesList);
 			choiceInstance_.transform.localPosition = Vector3.zero;
+
+			choiceInstance_.gameObject.AddComponent<BoxCollider>();
+			choiceInstance_.GetComponent<BoxCollider>().center = Vector3.zero;
+			Vector3 bounds_ = choiceInstance_.renderer.bounds.extents * 2.0f;
+			bounds_.z = 1.0f;
+			choiceInstance_.GetComponent<BoxCollider>().size = bounds_;
 		}
 	}
 

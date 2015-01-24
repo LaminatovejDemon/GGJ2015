@@ -18,6 +18,8 @@ public class Sentence : MonoBehaviour
 
 	[SerializeField]
 	public List<NextSentence> _NextSentenceList;
+
+	[HideInInspector]
 	public float _Speed = 1.0f;
 	
 	void OnEnable()
