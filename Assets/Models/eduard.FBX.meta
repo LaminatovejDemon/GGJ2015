@@ -96,7 +96,9 @@ ModelImporter:
     400088: //RootNode
     400090: Dummy01
     2300000: Box02
+    2300002: Box01
     3300000: Box02
+    3300002: Box01
     4300000: Box01
     4300002: Box02
     9500000: //RootNode
@@ -142,7 +144,7 @@ ModelImporter:
   copyAvatar: 0
   humanDescription:
     human:
-    - boneName: Bip01 Spine
+    - boneName: Bip01
       humanName: Hips
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -286,16 +288,8 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bip01 L Toe0
-      humanName: LeftToes
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Bip01 R Toe0
-      humanName: RightToes
+    - boneName: Box02
+      humanName: RightEye
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -312,11 +306,6 @@ ModelImporter:
       position: {x: 0, y: 1.32105863, z: -.0941485167}
       rotation: {x: -8.25305178e-05, y: 8.24927702e-05, z: 7.20223113e-07, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: Box02
-      position: {x: 8.26308024e-05, y: 1.81792998, z: .0109097445}
-      rotation: {x: .00027506554, y: 8.26358737e-05, z: -2.44811865e-10, w: 1}
-      scale: {x: .99999994, y: 1.00000012, z: 1}
       transformModified: 1
     - name: Dummy01
       position: {x: 0, y: 0, z: 0}
@@ -408,6 +397,11 @@ ModelImporter:
       rotation: {x: -4.11746566e-20, y: -3.38813179e-21, z: -1.39504867e-40, w: 1}
       scale: {x: 1, y: .99999994, z: .99999994}
       transformModified: 1
+    - name: Box02
+      position: {x: -.165989533, y: .0109098507, z: -8.23974478e-05}
+      rotation: {x: -.499909222, y: .500090778, z: .499909222, w: .500090778}
+      scale: {x: .99999994, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
     - name: Bip01 R Clavicle
       position: {x: -0, y: 5.38983913e-05, z: -.0315365121}
       rotation: {x: .581202924, y: .000230261547, z: .813758492, w: -.000324834051}
@@ -453,83 +447,83 @@ ModelImporter:
       rotation: {x: 1.69702734e-30, y: -9.55341462e-16, z: 1.77635705e-15, w: 1}
       scale: {x: .99999994, y: 1, z: .99999994}
       transformModified: 1
+    - name: Bip01 CoatBL
+      position: {x: .0088008726, y: .173832282, z: -1.64031972e-05}
+      rotation: {x: -.0242640786, y: -.733697832, z: -.107011057, w: .670557499}
+      scale: {x: .999999881, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: Bip01 CoatBL02
+      position: {x: -.166794807, y: -.000135402675, z: 1.43051144e-08}
+      rotation: {x: 0, y: 0, z: -3.72529074e-09, w: 1}
+      scale: {x: .99999994, y: .99999994, z: 1}
+      transformModified: 1
+    - name: Bip01 CoatBL03
+      position: {x: -.170075685, y: -.000161743155, z: 0}
+      rotation: {x: 0, y: 0, z: -3.72529074e-09, w: 1}
+      scale: {x: .99999994, y: .99999994, z: 1}
+      transformModified: 1
+    - name: Bip01 CoatBLNub
+      position: {x: -.203108326, y: 1.90734859e-08, z: 0}
+      rotation: {x: .707388282, y: -.706825197, z: -9.79316155e-07, w: -9.78536605e-07}
+      scale: {x: .99999994, y: .99999994, z: .99999994}
+      transformModified: 1
     - name: Bip01 CoatAL
-      position: {x: .100880362, y: .0578020625, z: -1.61743155e-05}
-      rotation: {x: -.428894401, y: -.530179858, z: -.522405088, w: .511910141}
+      position: {x: .100880362, y: .0578020662, z: -1.61743155e-05}
+      rotation: {x: -.428894371, y: -.530179799, z: -.522405088, w: .511910081}
       scale: {x: 1.00000012, y: 1, z: .99999994}
       transformModified: 1
     - name: Bip01 CoatAL02
-      position: {x: -.177480161, y: -.000136413568, z: 9.53674295e-09}
-      rotation: {x: -4.31125313e-09, y: -5.97105725e-08, z: .0213977117, w: .999771059}
+      position: {x: -.177480161, y: -.000136394505, z: 0}
+      rotation: {x: -5.39542677e-09, y: -6.34599147e-08, z: .0213977154, w: .999771059}
       scale: {x: .99999994, y: 1, z: 1}
       transformModified: 1
     - name: Bip01 CoatAL03
       position: {x: -.171455607, y: -.000160884854, z: -9.53674295e-09}
-      rotation: {x: 2.71611111e-09, y: -1.34139654e-07, z: .0492972992, w: .998784184}
-      scale: {x: 1, y: 1, z: 1.00000012}
+      rotation: {x: -8.2100432e-10, y: -1.38044058e-07, z: .0492972881, w: .998784184}
+      scale: {x: 1, y: 1.00000012, z: 1.00000012}
       transformModified: 1
     - name: Bip01 CoatALNub
-      position: {x: -.203022763, y: 9.53674295e-09, z: 1.90734859e-08}
-      rotation: {x: .707388282, y: -.706825256, z: -9.78369144e-07, w: -9.77590389e-07}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: Bip01 CoatBL
-      position: {x: .0088008726, y: .173832297, z: -1.6479491e-05}
-      rotation: {x: -.0242640115, y: -.733697891, z: -.107010931, w: .670557499}
-      scale: {x: 1, y: .99999994, z: .99999994}
-      transformModified: 1
-    - name: Bip01 CoatBL02
-      position: {x: -.166794732, y: -.00013544083, z: 0}
-      rotation: {x: -5.58793589e-09, y: 2.0816685e-17, z: -3.72529074e-09, w: 1}
-      scale: {x: .99999994, y: .99999994, z: 1}
-      transformModified: 1
-    - name: Bip01 CoatBL03
-      position: {x: -.170075521, y: -.000161762233, z: -4.76837148e-09}
-      rotation: {x: -5.58793589e-09, y: 2.0816685e-17, z: -3.72529074e-09, w: 1}
-      scale: {x: .99999994, y: .99999994, z: 1}
-      transformModified: 1
-    - name: Bip01 CoatBLNub
-      position: {x: -.20310837, y: 1.90734859e-08, z: 0}
-      rotation: {x: .707388282, y: -.706825256, z: -9.72730277e-07, w: -9.77222385e-07}
-      scale: {x: .999999881, y: .99999994, z: .99999994}
+      position: {x: -.203022763, y: 9.53674295e-09, z: 0}
+      rotation: {x: .707388282, y: -.706825256, z: -9.78410412e-07, w: -9.77631657e-07}
+      scale: {x: .999999881, y: .999999881, z: .99999994}
       transformModified: 1
     - name: Bip01 CoatBR
-      position: {x: .00880087167, y: -.173832282, z: -1.6479491e-05}
-      rotation: {x: .670557559, y: .107008882, z: .733698189, w: -.0242621377}
-      scale: {x: 1, y: .99999994, z: .999999881}
+      position: {x: .00880087167, y: -.173832282, z: -1.64031972e-05}
+      rotation: {x: .670557618, y: .107009016, z: .733698189, w: -.0242622085}
+      scale: {x: .999999881, y: .99999994, z: .99999994}
       transformModified: 1
     - name: Bip01 CoatBR02
-      position: {x: -.166794732, y: -.000135421753, z: 4.76837148e-09}
-      rotation: {x: 2.32830666e-09, y: 3.7252903e-09, z: -3.7252903e-09, w: 1}
-      scale: {x: 1, y: .99999994, z: 1}
+      position: {x: -.166794881, y: -.000135421753, z: -9.53674295e-09}
+      rotation: {x: -3.25962901e-09, y: 3.7252903e-09, z: -3.7252903e-09, w: 1}
+      scale: {x: 1, y: 1, z: 1.00000012}
       transformModified: 1
     - name: Bip01 CoatBR03
-      position: {x: -.17007561, y: -.000161724092, z: 0}
-      rotation: {x: 2.32830666e-09, y: 3.7252903e-09, z: -3.7252903e-09, w: 1}
-      scale: {x: 1, y: .99999994, z: 1}
+      position: {x: -.170075685, y: -.000161743155, z: 0}
+      rotation: {x: -3.25962901e-09, y: 3.7252903e-09, z: -3.7252903e-09, w: 1}
+      scale: {x: 1, y: 1, z: 1.00000012}
       transformModified: 1
     - name: Bip01 CoatBRNub
-      position: {x: -.20310837, y: -1.90734859e-08, z: 4.76837148e-09}
-      rotation: {x: .707388282, y: -.706825256, z: -9.91831371e-07, w: -9.85775728e-07}
-      scale: {x: 1, y: .99999994, z: 1}
+      position: {x: -.203108281, y: 0, z: 0}
+      rotation: {x: .707388282, y: -.706825256, z: -9.85245379e-07, w: -9.8446128e-07}
+      scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Bip01 CoatAR
-      position: {x: .100880355, y: -.057802055, z: -1.61743155e-05}
+      position: {x: .100880355, y: -.0578020625, z: -1.61743155e-05}
       rotation: {x: .511911273, y: .522403598, z: .530181229, w: -.42889297}
       scale: {x: 1.00000012, y: 1, z: .99999994}
       transformModified: 1
     - name: Bip01 CoatAR02
-      position: {x: -.177480236, y: -.000136413568, z: 0}
-      rotation: {x: 4.7670623e-09, y: -5.95162604e-08, z: .021397708, w: .999771059}
+      position: {x: -.177480236, y: -.000136413568, z: 9.53674295e-09}
+      rotation: {x: 2.43928922e-09, y: -5.95660801e-08, z: .0213977117, w: .999771059}
       scale: {x: 1.00000012, y: 1.00000012, z: 1.00000012}
       transformModified: 1
     - name: Bip01 CoatAR03
-      position: {x: -.171455681, y: -.000160865777, z: 0}
-      rotation: {x: -7.0472983e-10, y: -1.38038317e-07, z: .0492972955, w: .998784184}
-      scale: {x: 1.00000012, y: 1.00000012, z: 1}
+      position: {x: -.171455607, y: -.000160865777, z: 0}
+      rotation: {x: 2.95789393e-09, y: -1.37857569e-07, z: .0492972918, w: .998784184}
+      scale: {x: .99999994, y: 1, z: .99999994}
       transformModified: 1
     - name: Bip01 CoatARNub
-      position: {x: -.203022793, y: -9.53674295e-09, z: -9.53674295e-09}
+      position: {x: -.203022793, y: 0, z: -9.53674295e-09}
       rotation: {x: .707388282, y: -.706825256, z: -9.86233658e-07, w: -9.85448651e-07}
       scale: {x: 1, y: .99999994, z: 1.00000012}
       transformModified: 1
