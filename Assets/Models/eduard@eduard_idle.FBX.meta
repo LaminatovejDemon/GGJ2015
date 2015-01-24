@@ -80,7 +80,7 @@ ModelImporter:
     2300000: Box02
     3300000: Box02
     4300000: Box02
-    7400000: Take 001
+    7400000: eduard_idle
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -97,7 +97,120 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: eduard_idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 450
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box02
+        weight: 1
+      - path: Dummy01
+        weight: 1
+      - path: Dummy01/Bip01
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatAL
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatAL/Bip01 CoatAL02
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatAL/Bip01 CoatAL02/Bip01 CoatAL03
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatAR
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatAR/Bip01 CoatAR02
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatAR/Bip01 CoatAR02/Bip01 CoatAR03
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatBL
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatBL/Bip01 CoatBL02
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatBL/Bip01 CoatBL02/Bip01 CoatBL03
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatBR
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatBR/Bip01 CoatBR02
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatBR/Bip01 CoatBR02/Bip01 CoatBR03
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 L Thigh
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 L Thigh/Bip01 L Calf
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 L Thigh/Bip01 L Calf/Bip01
+          L Foot
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 L Thigh/Bip01 L Calf/Bip01
+          L Foot/Bip01 L Toe0
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh/Bip01 R Calf
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh/Bip01 R Calf/Bip01
+          R Foot
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh/Bip01 R Calf/Bip01
+          R Foot/Bip01 R Toe0
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          Head
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          L Clavicle
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          L Clavicle/Bip01 L UpperArm
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          L Clavicle/Bip01 L UpperArm/Bip01 L Forearm
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          L Clavicle/Bip01 L UpperArm/Bip01 L Forearm/Bip01 L Hand
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          R Clavicle
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          R Clavicle/Bip01 R UpperArm
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          R Clavicle/Bip01 R UpperArm/Bip01 R Forearm
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          R Clavicle/Bip01 R UpperArm/Bip01 R Forearm/Bip01 R Hand
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
