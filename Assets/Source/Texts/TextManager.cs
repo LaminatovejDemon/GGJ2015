@@ -8,7 +8,7 @@ public class TextManager : MonoBehaviour
 	public Sentence _FirstSentence;
 	public Font _FontTemplate;
 	public float _TextSpeedMultiplier = 1.0f;
-
+	public List<Choice> _VisibleChoices;
 	public List<Transform> _ChoicePositions;
 
 	Sentence _ActualSentence;
@@ -62,11 +62,17 @@ public class TextManager : MonoBehaviour
 		Vector3 bounds_ = choiceInstance_.transform.GetChild(0).renderer.bounds.extents * 2.0f;
 		bounds_.z = 1.0f;
 		choiceInstance_.GetComponent<BoxCollider>().size = bounds_;
+		choiceInstance_._parentSentence = item;
+
+		if ( _VisibleChoices == null )
+		{
+			_VisibleChoices = new List<Choice>();
+		}
+		_VisibleChoices.Add(choiceInstance_);
 	}
 
 	IEnumerator DisplayChoices(List<Sentence.NextSentence> choices)
 	{
-	
 		List<Transform> _choicesList = new List<Transform>(_ChoicePositions);
 
 		for ( int i = 0; i < Mathf.Min(3, choices.Count); ++i )
@@ -75,6 +81,26 @@ public class TextManager : MonoBehaviour
 			yield return new WaitForSeconds(0.5f / ((float)i+1));
 		}
 
+		yield break;
+	}
+
+	IEnumerator HideActualChoicesBut(Choice but)
+	{
+		for ( int i = 0; i < _VisibleChoices.Count; ++i )
+		{
+			if ( _VisibleChoices[i] == but )
+			{
+				continue;
+			}
+
+			_VisibleChoices[i].animation.Play("ChoiceHide");
+			_VisibleChoices[i].DestroyWhenAnimationDone();
+
+			yield return new WaitForSeconds(0.1f);
+		}
+
+		_VisibleChoices.Clear();
+		
 		yield break;
 	}
 
@@ -87,6 +113,11 @@ public class TextManager : MonoBehaviour
 		choicesList.RemoveAt(index_);
 
 		return ret_;
+	}
+
+	public void ChoiceSelected(Choice target)
+	{
+		StartCoroutine(HideActualChoicesBut(target));
 	}
 
 }
