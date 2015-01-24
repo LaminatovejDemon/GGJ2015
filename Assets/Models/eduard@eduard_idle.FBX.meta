@@ -40,6 +40,15 @@ ModelImporter:
     100068: Box02
     100070: Dummy01
     100072: //RootNode
+    100074: Bip01 CoatALNub
+    100076: Bip01 CoatARNub
+    100078: Bip01 CoatBLNub
+    100080: Bip01 CoatBRNub
+    100082: Bip01 Footsteps
+    100084: Bip01 HeadNub
+    100086: Bip01 L Toe0Nub
+    100088: Bip01 R Toe0Nub
+    100090: Box01
     400000: Bip01
     400002: Bip01 CoatAL
     400004: Bip01 CoatAL02
@@ -77,11 +86,22 @@ ModelImporter:
     400068: Box02
     400070: Dummy01
     400072: //RootNode
+    400074: Bip01 CoatALNub
+    400076: Bip01 CoatARNub
+    400078: Bip01 CoatBLNub
+    400080: Bip01 CoatBRNub
+    400082: Bip01 Footsteps
+    400084: Bip01 HeadNub
+    400086: Bip01 L Toe0Nub
+    400088: Bip01 R Toe0Nub
+    400090: Box01
     2300000: Box02
     3300000: Box02
     4300000: Box02
+    4300002: Box01
     7400000: eduard_idle
     9500000: //RootNode
+    13700000: Box01
   materials:
     importMaterials: 1
     materialName: 0
