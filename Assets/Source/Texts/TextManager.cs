@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class TextManager : MonoBehaviour 
 {
+	bool _EndGame = false;
+
 	public Choice _ChoiceTemplate;
 	public Font _FontTemplate;
 	public float _LargeFontSize;
@@ -20,6 +22,12 @@ public class TextManager : MonoBehaviour
 
 	void CreateSentence(Sentence targetTemplate, int index = 0)
 	{
+		if ( targetTemplate == null )
+		{
+			_EndGame = true;
+			return;
+		}
+
 		_ActualTemplate = targetTemplate;
 		_ActualSentence = GameObject.Instantiate(targetTemplate) as Sentence;
 		TextMesh text_ = _ActualSentence.gameObject.AddComponent<TextMesh>();
@@ -36,7 +44,7 @@ public class TextManager : MonoBehaviour
 
 	void Update()
 	{
-		if ( _ActualSentence == null )
+		if ( _ActualSentence == null && _EndGame != true )
 		{
 			CreateSentence(ChapterManager.Get().GetEpisode());
 		}
@@ -47,6 +55,7 @@ public class TextManager : MonoBehaviour
 		if ( _Instance == null )
 		{
 			_Instance = GameObject.FindGameObjectWithTag("TextManager").GetComponent<TextManager>();
+			_Instance._EndGame = false;
 		}
 
 		return _Instance;

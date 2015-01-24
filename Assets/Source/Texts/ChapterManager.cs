@@ -7,9 +7,15 @@ public class ChapterManager : MonoBehaviour
 {
 	int _CurrentChapter;
 
+	[System.Serializable]
+	public class Chapter
+	{
+		[SerializeField]
+		public List<Sentence> _Chapter;
+	};
+
 	[SerializeField]
-	public List< List<Sentence>> _Chapters; 
-	public Sentence _FailsafeEpisode;
+	public List< Chapter > _Chapters; 
 
 	static ChapterManager _Instance;
 
@@ -26,9 +32,7 @@ public class ChapterManager : MonoBehaviour
 
 	public Sentence GetEpisode()
 	{
-		return _FailsafeEpisode;
-
-		if ( _CurrentChapter < _Chapters.Count && _Chapters[_CurrentChapter].Count == 0 )
+		if ( _CurrentChapter < _Chapters.Count && _Chapters[_CurrentChapter]._Chapter.Count == 0 )
 		{
 			++_CurrentChapter;
 		}
@@ -38,11 +42,11 @@ public class ChapterManager : MonoBehaviour
 			return null;
 		}
 
-		int targetIndex_ = Random.Range(0, _Chapters[_CurrentChapter].Count);
+		int targetIndex_ = Random.Range(0, _Chapters[_CurrentChapter]._Chapter.Count);
 
-		Sentence ret_ = _Chapters[_CurrentChapter][targetIndex_];
+		Sentence ret_ = _Chapters[_CurrentChapter]._Chapter[targetIndex_];
 
-		_Chapters[_CurrentChapter].RemoveAt(targetIndex_);
+		_Chapters[_CurrentChapter]._Chapter.RemoveAt(targetIndex_);
 
 		return ret_;
 	}
