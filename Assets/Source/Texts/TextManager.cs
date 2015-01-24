@@ -116,8 +116,7 @@ public class TextManager : MonoBehaviour
 				continue;
 			}
 
-			_VisibleChoices[i].animation.Play("ChoiceHide");
-			_VisibleChoices[i].DestroyWhenAnimationDone();
+			_VisibleChoices[i].GetComponent<Animator>().SetBool("Hide", true);
 
 //			yield return new WaitForSeconds(0.1f);
 		}
@@ -143,8 +142,7 @@ public class TextManager : MonoBehaviour
 		_ActualSentence.Leave();
 
 		StartCoroutine(HideActualChoicesBut(target));
-		target.animation.Play("ChoiceSelect");
-		target.DestroyWhenAnimationDone();
+		target.GetComponent<Animator>().SetBool("Select", true);
 		CreateSentence(target._parentSentence._Target);
 
 	}

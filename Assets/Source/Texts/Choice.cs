@@ -3,14 +3,11 @@ using System.Collections;
 
 public class Choice : MonoBehaviour 
 {
-	bool _ForDestroy = false;
 	public Sentence.NextSentence _parentSentence;
 
 	void OnEnable() 
 	{
-		_ForDestroy = false;
 		InputController.RegisterListener(OnInput);	
-		animation.PlayQueued("ChoiceIdle");
 	}
 
 	void OnDestroy()
@@ -25,7 +22,7 @@ public class Choice : MonoBehaviour
 			return;
 		}
 		
-		if ( phase == TouchPhase.Ended && !_ForDestroy )
+		if ( phase == TouchPhase.Ended && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ChoiceIdle") )
 		{
 			TextManager.Get().ChoiceSelected(this);
 		}
@@ -41,16 +38,10 @@ public class Choice : MonoBehaviour
 
 	public void Update()
 	{
-		if ( _ForDestroy && !animation.isPlaying )
+		if ( GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Finished") )
 		{
 			Destroy(this.gameObject);
-			_ForDestroy = false;
 		}
-	}
-
-	public void DestroyWhenAnimationDone()
-	{
-		_ForDestroy = true;
 	}
 
 }

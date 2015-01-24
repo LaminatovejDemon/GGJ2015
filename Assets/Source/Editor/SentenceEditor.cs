@@ -36,6 +36,7 @@ public class SentenceEditor : Editor
 		UpdateBegin();
 //		base.OnInspectorGUI ();
 
+		EditorGUILayout.LabelField("Sentences");
 		for ( int i = 0; i < m_Data._Labels.Count; ++i )
 		{
 			EditorGUILayout.BeginHorizontal();
@@ -45,6 +46,7 @@ public class SentenceEditor : Editor
 		}
 		ShowLabelsControllers();
 
+		EditorGUILayout.LabelField("Follow ups");
 		for ( int i = 0; i < m_Data._NextSentenceList.Count; ++i )
 		{
 			EditorGUILayout.BeginHorizontal();
