@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 34c923d9fa13fd447b429a19f9e10434
+guid: 127ae66d1243a8447981179c4d5676f2
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -7,101 +7,81 @@ ModelImporter:
     100002: Bip01 CoatAL
     100004: Bip01 CoatAL02
     100006: Bip01 CoatAL03
-    100008: Bip01 CoatALNub
-    100010: Bip01 CoatAR
-    100012: Bip01 CoatAR02
-    100014: Bip01 CoatAR03
-    100016: Bip01 CoatARNub
-    100018: Bip01 CoatBL
-    100020: Bip01 CoatBL02
-    100022: Bip01 CoatBL03
-    100024: Bip01 CoatBLNub
-    100026: Bip01 CoatBR
-    100028: Bip01 CoatBR02
-    100030: Bip01 CoatBR03
-    100032: Bip01 CoatBRNub
-    100034: Bip01 Footsteps
-    100036: Bip01 Head
-    100038: Bip01 HeadNub
-    100040: Bip01 L Calf
-    100042: Bip01 L Clavicle
-    100044: Bip01 L Foot
-    100046: Bip01 L Forearm
-    100048: Bip01 L Hand
-    100050: Bip01 L Thigh
-    100052: Bip01 L Toe0
-    100054: Bip01 L Toe0Nub
-    100056: Bip01 L UpperArm
-    100058: Bip01 Neck
-    100060: Bip01 Pelvis
-    100062: Bip01 R Calf
-    100064: Bip01 R Clavicle
-    100066: Bip01 R Foot
-    100068: Bip01 R Forearm
-    100070: Bip01 R Hand
-    100072: Bip01 R Thigh
-    100074: Bip01 R Toe0
-    100076: Bip01 R Toe0Nub
-    100078: Bip01 R UpperArm
-    100080: Bip01 Spine
-    100082: Bip01 Spine1
-    100084: Box01
-    100086: Box02
-    100088: Dummy01
-    100090: //RootNode
+    100008: Bip01 CoatAR
+    100010: Bip01 CoatAR02
+    100012: Bip01 CoatAR03
+    100014: Bip01 CoatBL
+    100016: Bip01 CoatBL02
+    100018: Bip01 CoatBL03
+    100020: Bip01 CoatBR
+    100022: Bip01 CoatBR02
+    100024: Bip01 CoatBR03
+    100026: Bip01 Head
+    100028: Bip01 L Calf
+    100030: Bip01 L Clavicle
+    100032: Bip01 L Foot
+    100034: Bip01 L Forearm
+    100036: Bip01 L Hand
+    100038: Bip01 L Thigh
+    100040: Bip01 L Toe0
+    100042: Bip01 L UpperArm
+    100044: Bip01 Neck
+    100046: Bip01 Pelvis
+    100048: Bip01 R Calf
+    100050: Bip01 R Clavicle
+    100052: Bip01 R Foot
+    100054: Bip01 R Forearm
+    100056: Bip01 R Hand
+    100058: Bip01 R Thigh
+    100060: Bip01 R Toe0
+    100062: Bip01 R UpperArm
+    100064: Bip01 Spine
+    100066: Bip01 Spine1
+    100068: Box02
+    100070: Dummy01
+    100072: //RootNode
     400000: Bip01
     400002: Bip01 CoatAL
     400004: Bip01 CoatAL02
     400006: Bip01 CoatAL03
-    400008: Bip01 CoatALNub
-    400010: Bip01 CoatAR
-    400012: Bip01 CoatAR02
-    400014: Bip01 CoatAR03
-    400016: Bip01 CoatARNub
-    400018: Bip01 CoatBL
-    400020: Bip01 CoatBL02
-    400022: Bip01 CoatBL03
-    400024: Bip01 CoatBLNub
-    400026: Bip01 CoatBR
-    400028: Bip01 CoatBR02
-    400030: Bip01 CoatBR03
-    400032: Bip01 CoatBRNub
-    400034: Bip01 Footsteps
-    400036: Bip01 Head
-    400038: Bip01 HeadNub
-    400040: Bip01 L Calf
-    400042: Bip01 L Clavicle
-    400044: Bip01 L Foot
-    400046: Bip01 L Forearm
-    400048: Bip01 L Hand
-    400050: Bip01 L Thigh
-    400052: Bip01 L Toe0
-    400054: Bip01 L Toe0Nub
-    400056: Bip01 L UpperArm
-    400058: Bip01 Neck
-    400060: Bip01 Pelvis
-    400062: Bip01 R Calf
-    400064: Bip01 R Clavicle
-    400066: Bip01 R Foot
-    400068: Bip01 R Forearm
-    400070: Bip01 R Hand
-    400072: Bip01 R Thigh
-    400074: Bip01 R Toe0
-    400076: Bip01 R Toe0Nub
-    400078: Bip01 R UpperArm
-    400080: Bip01 Spine
-    400082: Bip01 Spine1
-    400084: Box01
-    400086: Box02
-    400088: Dummy01
-    400090: //RootNode
+    400008: Bip01 CoatAR
+    400010: Bip01 CoatAR02
+    400012: Bip01 CoatAR03
+    400014: Bip01 CoatBL
+    400016: Bip01 CoatBL02
+    400018: Bip01 CoatBL03
+    400020: Bip01 CoatBR
+    400022: Bip01 CoatBR02
+    400024: Bip01 CoatBR03
+    400026: Bip01 Head
+    400028: Bip01 L Calf
+    400030: Bip01 L Clavicle
+    400032: Bip01 L Foot
+    400034: Bip01 L Forearm
+    400036: Bip01 L Hand
+    400038: Bip01 L Thigh
+    400040: Bip01 L Toe0
+    400042: Bip01 L UpperArm
+    400044: Bip01 Neck
+    400046: Bip01 Pelvis
+    400048: Bip01 R Calf
+    400050: Bip01 R Clavicle
+    400052: Bip01 R Foot
+    400054: Bip01 R Forearm
+    400056: Bip01 R Hand
+    400058: Bip01 R Thigh
+    400060: Bip01 R Toe0
+    400062: Bip01 R UpperArm
+    400064: Bip01 Spine
+    400066: Bip01 Spine1
+    400068: Box02
+    400070: Dummy01
+    400072: //RootNode
     2300000: Box02
     3300000: Box02
-    4300000: Box01
-    4300002: Box02
-    7400000: eduard_walkslow
+    4300000: Box02
+    7400000: eduard_idle
     9500000: //RootNode
-    13700000: Box01
   materials:
     importMaterials: 1
     materialName: 0
@@ -119,10 +99,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: eduard_walkslow
+      name: eduard_idle
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 450
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -144,8 +124,6 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
-      - path: Box01
-        weight: 1
       - path: Box02
         weight: 1
       - path: Dummy01
@@ -158,15 +136,11 @@ ModelImporter:
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatAL/Bip01 CoatAL02/Bip01 CoatAL03
         weight: 1
-      - path: Dummy01/Bip01/Bip01 CoatAL/Bip01 CoatAL02/Bip01 CoatAL03/Bip01 CoatALNub
-        weight: 1
       - path: Dummy01/Bip01/Bip01 CoatAR
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatAR/Bip01 CoatAR02
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatAR/Bip01 CoatAR02/Bip01 CoatAR03
-        weight: 1
-      - path: Dummy01/Bip01/Bip01 CoatAR/Bip01 CoatAR02/Bip01 CoatAR03/Bip01 CoatARNub
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatBL
         weight: 1
@@ -174,17 +148,11 @@ ModelImporter:
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatBL/Bip01 CoatBL02/Bip01 CoatBL03
         weight: 1
-      - path: Dummy01/Bip01/Bip01 CoatBL/Bip01 CoatBL02/Bip01 CoatBL03/Bip01 CoatBLNub
-        weight: 1
       - path: Dummy01/Bip01/Bip01 CoatBR
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatBR/Bip01 CoatBR02
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatBR/Bip01 CoatBR02/Bip01 CoatBR03
-        weight: 1
-      - path: Dummy01/Bip01/Bip01 CoatBR/Bip01 CoatBR02/Bip01 CoatBR03/Bip01 CoatBRNub
-        weight: 1
-      - path: Dummy01/Bip01/Bip01 Footsteps
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis
         weight: 1
@@ -200,9 +168,6 @@ ModelImporter:
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 L Thigh/Bip01 L Calf/Bip01
           L Foot/Bip01 L Toe0
         weight: 1
-      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 L Thigh/Bip01 L Calf/Bip01
-          L Foot/Bip01 L Toe0/Bip01 L Toe0Nub
-        weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh/Bip01 R Calf
@@ -213,18 +178,12 @@ ModelImporter:
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh/Bip01 R Calf/Bip01
           R Foot/Bip01 R Toe0
         weight: 1
-      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh/Bip01 R Calf/Bip01
-          R Foot/Bip01 R Toe0/Bip01 R Toe0Nub
-        weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
           Head
-        weight: 1
-      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
-          Head/Bip01 HeadNub
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
           L Clavicle
