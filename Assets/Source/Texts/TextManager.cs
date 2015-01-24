@@ -15,21 +15,25 @@ public class TextManager : MonoBehaviour
 
 	private static TextManager _Instance;
 
+	void CreateSentence(Sentence target)
+	{
+		_ActualSentence = GameObject.Instantiate(target) as Sentence;
+		TextMesh text_ = _ActualSentence.gameObject.AddComponent<TextMesh>();
+		text_.font = _FontTemplate;
+		text_.text = _ActualSentence._Label;
+		text_.characterSize = 0.125f;
+		text_.anchor = TextAnchor.MiddleLeft;
+		text_.color = Color.black;
+		_ActualSentence._Speed = 0.2f * _TextSpeedMultiplier;
+		_ActualSentence.GetComponent<MeshRenderer>().material = _FontTemplate.material;
+		_ActualSentence.transform.parent = transform;
+	}
+
 	void Update()
 	{
 		if ( _ActualSentence == null )
 		{
-			_ActualSentence = GameObject.Instantiate(_FirstSentence) as Sentence;
-			TextMesh text_ = _ActualSentence.gameObject.AddComponent<TextMesh>();
-			text_.font = _FontTemplate;
-			text_.text = _ActualSentence._Label;
-			text_.characterSize = 0.125f;
-			text_.anchor = TextAnchor.MiddleLeft;
-			text_.color = Color.black;
-			_ActualSentence._Speed = 0.2f * _TextSpeedMultiplier;
-			_ActualSentence.GetComponent<MeshRenderer>().material = _FontTemplate.material;
-			_ActualSentence.transform.parent = transform;
-
+			CreateSentence(_FirstSentence);
 		}
 	}
 
@@ -43,7 +47,7 @@ public class TextManager : MonoBehaviour
 		return _Instance;
 	}
 
-	public void OnSentenceFinished(Sentence source)
+	public void OnSentenceTrigger(Sentence source)
 	{
 		StartCoroutine(DisplayChoices(source._NextSentenceList));
 	}
@@ -96,7 +100,7 @@ public class TextManager : MonoBehaviour
 			_VisibleChoices[i].animation.Play("ChoiceHide");
 			_VisibleChoices[i].DestroyWhenAnimationDone();
 
-			yield return new WaitForSeconds(0.1f);
+//			yield return new WaitForSeconds(0.1f);
 		}
 
 		_VisibleChoices.Clear();
@@ -117,7 +121,19 @@ public class TextManager : MonoBehaviour
 
 	public void ChoiceSelected(Choice target)
 	{
-		StartCoroutine(HideActualChoicesBut(target));
+		_ActualSentence.Leave();
+
+		if ( target == null )
+		{
+			CreateSentence(_FirstSentence);
+		}
+		else
+		{
+			StartCoroutine(HideActualChoicesBut(target));
+			target.animation.Play("ChoiceSelect");
+			target.DestroyWhenAnimationDone();
+			CreateSentence(target._parentSentence._Target);
+		}
 	}
 
 }

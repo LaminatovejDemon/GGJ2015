@@ -5,7 +5,17 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Sentence : MonoBehaviour 
 {
-	bool _Finished;
+	bool _WaitingForInteraction;
+
+	enum SentencePhase
+	{
+		Pending,
+		WaitingForInteraction,
+		Leaving,
+		Finished,
+	}
+
+	SentencePhase _SentencePhase;
 
 	[System.Serializable]
 	public class NextSentence
@@ -21,10 +31,16 @@ public class Sentence : MonoBehaviour
 
 	[HideInInspector]
 	public float _Speed = 1.0f;
+	float _RealSpeed;
 	
 	void OnEnable()
 	{
 		Reset();
+	}
+
+	public void Leave()
+	{
+		_SentencePhase = SentencePhase.Leaving;
 	}
 	
 	void Reset()
@@ -33,22 +49,39 @@ public class Sentence : MonoBehaviour
 		Vector3 pos = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, 0.0f));
 		defaultPos_.x = pos.x;
 		transform.position = defaultPos_;
-		_Finished = false;
+		_SentencePhase = SentencePhase.Pending;
+		_RealSpeed = _Speed;
 	}
 	
 	void Update()
 	{
-		if ( _Finished )
+		if ( _SentencePhase == SentencePhase.WaitingForInteraction )
 		{
-			_Speed -= _Speed * Time.deltaTime;
+			_RealSpeed -= _RealSpeed * Time.deltaTime;
+		}
+		else if ( _SentencePhase == SentencePhase.Leaving && _RealSpeed < _Speed )
+		{
+			_RealSpeed += _Speed * Time.deltaTime * 2.0f;
 		}
 	
-		transform.localPosition += Vector3.left * Time.deltaTime * 5.0f * _Speed;
+		transform.localPosition += Vector3.left * Time.deltaTime * 5.0f * _RealSpeed;
 		
-		if ( !_Finished && Camera.main.WorldToViewportPoint(transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f)).x < 1.0f )
+		if ( _SentencePhase == SentencePhase.Pending && Camera.main.WorldToViewportPoint(transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f)).x < 1.0f )
 		{
-			_Finished = true;
-			TextManager.Get().OnSentenceFinished(this);
+			if ( _NextSentenceList.Count > 0 )
+			{
+				_SentencePhase = SentencePhase.WaitingForInteraction;
+				TextManager.Get().OnSentenceTrigger(this);
+			}
+			else 
+			{
+				TextManager.Get().ChoiceSelected(null);
+				Leave();
+			}
+		}
+		else if ( _SentencePhase == SentencePhase.Leaving && Camera.main.WorldToViewportPoint(transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f)).x < 0.0f )
+		{
+			GameObject.Destroy(gameObject);
 		}
 	}	
 }

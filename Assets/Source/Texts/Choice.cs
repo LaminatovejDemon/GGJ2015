@@ -12,6 +12,11 @@ public class Choice : MonoBehaviour
 		InputController.RegisterListener(OnInput);	
 		animation.PlayQueued("ChoiceIdle");
 	}
+
+	void OnDestroy()
+	{
+		InputController.UnregisterListener(OnInput);
+	}
 	
 	void OnInput(TouchPhase phase, Collider targetObject, Vector3 position)
 	{

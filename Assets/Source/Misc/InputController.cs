@@ -26,6 +26,16 @@ public class InputController : MonoBehaviour
 		instance._Listeners.Add(listener);
 	}
 
+	public static void UnregisterListener(TouchListener listener)
+	{
+		if ( instance == null || instance._Listeners == null )
+		{
+			return;
+		}
+		
+		instance._Listeners.Remove(listener);
+	}
+
 	void Update()
 	{
 
