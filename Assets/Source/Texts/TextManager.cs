@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class TextManager : MonoBehaviour 
 {
 	public Choice _ChoiceTemplate;
-	public Sentence _FirstSentence;
 	public Font _FontTemplate;
 	public float _LargeFontSize;
 	public float _SmallFontSize;
@@ -39,7 +38,7 @@ public class TextManager : MonoBehaviour
 	{
 		if ( _ActualSentence == null )
 		{
-			CreateSentence(_FirstSentence);
+			CreateSentence(ChapterManager.Get().GetEpisode());
 		}
 	}
 
@@ -67,7 +66,7 @@ public class TextManager : MonoBehaviour
 		else if ( _choicesList.Count == 0 )
 		{
 			source.Leave();
-			CreateSentence(_FirstSentence);
+			CreateSentence(ChapterManager.Get().GetEpisode());
 		}
 		else 
 		{
