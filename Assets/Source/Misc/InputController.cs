@@ -142,6 +142,11 @@ public class InputController : MonoBehaviour
 
 	void NotifyListeners(TouchPhase phase, Collider target, Vector3 position)
 	{
+		if ( _Listeners == null )
+		{
+			return;
+		}
+
 		for ( int i = 0; i < _Listeners.Count; ++i )
 		{
 			_Listeners[i](phase, target, position);

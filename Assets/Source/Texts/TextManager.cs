@@ -7,6 +7,9 @@ public class TextManager : MonoBehaviour
 	bool _EndGame = false;
 	bool _Initialised = false;
 	bool _InitCharacterShouldStop = false;
+	public bool _ChoicesAreDisplayed {private set; get;}
+	public GameObject _BloodIntro;
+	public Vector3 _BloodIntroPosition;
 
 	public ChapterManager _ChapterManagerTemplate;
 	public Choice _ChoiceTemplate;
@@ -30,6 +33,11 @@ public class TextManager : MonoBehaviour
 
 	public void OnSentenceEnd(Sentence source)
 	{
+		if ( _BloodIntro.activeSelf )
+		{
+			_BloodIntro.SetActive(false);
+			_BloodIntro.transform.parent = null;
+		}
 		_Queue.Remove(source);
 	}
 
@@ -43,6 +51,10 @@ public class TextManager : MonoBehaviour
 
 		_ActualTemplate = targetTemplate;
 		_ActualSentence = GameObject.Instantiate(targetTemplate) as Sentence;
+
+
+
+
 		_ActualSentence.transform.parent = transform;
 		_ActualSentence.transform.localPosition = Vector3.zero;
 		_Queue.Add(_ActualSentence);
@@ -69,8 +81,20 @@ public class TextManager : MonoBehaviour
 
 		if ( _Queue.Count == 1 )
 		{
+			if ( _BloodIntro.activeSelf )
+			{
+				_BloodIntro.transform.parent = _ActualSentence.transform;
+			}
+
+			if ( largeFont_ )
+			{
+				localPosition_.y -= 0.7f;
+				_ActualSentence.transform.localPosition = localPosition_;
+			}
+
 			return;
 		}
+
 
 		Vector3 previousEndWorldPoint_ = _Queue[_Queue.Count-2].transform.localPosition + _Queue[_Queue.Count-2].renderer.bounds.extents * 2.0f;
 
@@ -87,17 +111,27 @@ public class TextManager : MonoBehaviour
 		{
 	 		if ( _Queue[_Queue.Count-2].transform.localPosition.y <= -2.5f )
 			{
-				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y + 2.5f;
+				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y + 2.7f;
 			}
 			else if ( _Queue[_Queue.Count-2].transform.localPosition.y >= 2.5f )
 			{
-				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y - 2.5f;
+				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y - 2.7f;
 			}
 			else
 			{
-				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y + ((Random.Range(0,2) * 2.0f)-1) * 2.5f;
+				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y + /*((Random.Range(0,2) * 2.0f)-1) */ 2.7f;
 			}
 		}
+
+		if ( largeFont_ )
+		{
+			localPosition_.y -= 0.7f;
+		}
+		else if ( _ActualSentencePartIndex > 0 && targetTemplate._LargeLabels[_ActualSentencePartIndex-1] )
+		{
+			localPosition_.y += 0.7f;
+		}
+
 		_ActualSentence.transform.localPosition = localPosition_;
 		
 	}
@@ -109,12 +143,15 @@ public class TextManager : MonoBehaviour
 			return;
 		}
 	
-
+		_ChoicesAreDisplayed = false;
 		if ( !_InitCharacterShouldStop )
 		{
 			_InitCharPostion = JohnHandler.Get()._John.transform.position;
+			_BloodIntroPosition = _BloodIntro.transform.position;
 			_InitCharacterShouldStop = true;
 		}
+		_BloodIntro.SetActive(true);
+		_BloodIntro.transform.position = _BloodIntroPosition;
 		Vector3 charPos_ = _InitCharPostion;
 		charPos_.x = Camera.main.ViewportToWorldPoint(Vector3.left * 0.1f).x;
 		JohnHandler.Get()._John.transform.position = charPos_;
@@ -259,6 +296,7 @@ public class TextManager : MonoBehaviour
 	IEnumerator DisplayChoices(List<Sentence.NextSentence> choices)
 	{
 		JohnHandler.Get().DoStop();
+		_ChoicesAreDisplayed = true;
 		List<Transform> _choicesPlaces = new List<Transform>(_ChoicePositions);
 
 		for ( int i = 0; i < Mathf.Min(3, choices.Count); ++i )
@@ -302,6 +340,7 @@ public class TextManager : MonoBehaviour
 
 	public void ChoiceSelected(Choice target)
 	{
+		_ChoicesAreDisplayed = false;
 		JohnHandler.Get().DoAction(JohnHandler.Action.Walk);
 		if ( _ActualSentence != null )
 		{
@@ -311,6 +350,8 @@ public class TextManager : MonoBehaviour
 				ColorManager.Get().SetMood(target._parentSentence._Condition._ScoreType);
 			}
 		}
+
+
 
 		StartCoroutine(HideActualChoicesBut(target));
 		target.GetComponent<Animator>().SetBool("Select", true);

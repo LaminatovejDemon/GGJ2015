@@ -23,8 +23,8 @@ public class Choice : MonoBehaviour
 		}
 		
 		if ( phase == TouchPhase.Ended && 
-		    (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ChoiceIdle")) ||
-		 	(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ChoiceShow")) )
+		    ((GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ChoiceIdle")) ||
+		 	(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ChoiceShow")) ))
 		{
 			if (_parentSentence._Condition != null )
 			{
