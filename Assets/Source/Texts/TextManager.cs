@@ -118,7 +118,7 @@ public class TextManager : MonoBehaviour
 	{
 		Vector3 _JohnPosition = JohnHandler.Get()._John.transform.position;
 		float _HighestPoint = Camera.main.ViewportToWorldPoint(Vector3.zero).y;
-		bool noMatch_ = true;
+		Sentence match_ = null;
 
 		for ( int i = 0; i< _Queue.Count; ++i )
 		{
@@ -127,20 +127,16 @@ public class TextManager : MonoBehaviour
 				continue;
 			}
 
-			noMatch_ = false;
 			float altitude_ = _Queue[i].transform.position.y + _Queue[i].renderer.bounds.extents.y * 0.3f;
 
-			_HighestPoint = Mathf.Max(_HighestPoint, altitude_);
+			if ( altitude_ > _HighestPoint )
+			{
+				_HighestPoint = altitude_;
+				match_ = _Queue[i];
+			}
 		}
 
-		if ( noMatch_ )
-		{
-			return;
-		}
-
-		_JohnPosition.y = _HighestPoint;
-
-		JohnHandler.Get().SetYPosition(_HighestPoint);
+		JohnHandler.Get().SetYPosition(_HighestPoint, match_);
 	}
 
 	public static TextManager Get()
@@ -201,7 +197,7 @@ public class TextManager : MonoBehaviour
 
 	IEnumerator DisplayChoices(List<Sentence.NextSentence> choices)
 	{
-		JohnHandler.Get().DoAction(JohnHandler.Action.Stop);
+		JohnHandler.Get().DoStop();
 		List<Transform> _choicesPlaces = new List<Transform>(_ChoicePositions);
 
 		for ( int i = 0; i < Mathf.Min(3, choices.Count); ++i )

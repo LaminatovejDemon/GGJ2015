@@ -50,12 +50,14 @@ public class Sentence : MonoBehaviour
 		_RealSpeed = 1.0f;
 		_SentencePhase = SentencePhase.Pending;
 	}
+
+	public float GetActualSpeed()
+	{
+		return 5.0f * _RealSpeed * _Speed;
+	}
 	
 	void Update()
 	{
-
-
-
 		Vector3 endSentenceWorldPoint_ = 
 			transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f);                                                          
 
