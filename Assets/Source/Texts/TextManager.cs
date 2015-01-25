@@ -146,7 +146,7 @@ public class TextManager : MonoBehaviour
 			}
 			else
 			{
-				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y + /*((Random.Range(0,2) * 2.0f)-1) */ 2.7f;
+				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y + ((Random.Range(0,2) * 2.0f)-1) * 2.7f;
 			}
 		}
 
@@ -338,10 +338,17 @@ public class TextManager : MonoBehaviour
 		_ChoicesAreDisplayed = true;
 		List<Transform> _choicesPlaces = new List<Transform>(_ChoicePositions);
 
-		for ( int i = 0; i < Mathf.Min(3, choices.Count); ++i )
+		List<Sentence.NextSentence> choicesToDisplay_ = new List<Sentence.NextSentence>(choices);
+		int choicesDisplayed = 0;
+
+		while ( choicesDisplayed < 3 && choicesToDisplay_.Count > 0)
 		{
-			DisplayChoice(choices[i], _choicesPlaces);
-			yield return new WaitForSeconds(0.5f / ((float)i+1));
+			int index_ = Random.Range(0, choicesToDisplay_.Count);
+			DisplayChoice(choicesToDisplay_[index_], _choicesPlaces);
+			Debug.Log ("Displaying index " + index_ + " out of " + choicesToDisplay_.Count);
+			++choicesDisplayed;
+			yield return new WaitForSeconds(0.5f / ((float)choicesDisplayed+1));
+			choicesToDisplay_.RemoveAt(index_);
 		}
 
 		yield break;
