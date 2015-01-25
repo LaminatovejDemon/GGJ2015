@@ -53,6 +53,9 @@ public class Sentence : MonoBehaviour
 	
 	void Update()
 	{
+
+
+
 		Vector3 endSentenceWorldPoint_ = 
 			transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f);                                                          
 

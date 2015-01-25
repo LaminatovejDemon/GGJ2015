@@ -111,6 +111,30 @@ public class TextManager : MonoBehaviour
 	void Update()
 	{
 		Initialise();
+		GetJohnSentence();
+	}
+
+	public void GetJohnSentence()
+	{
+
+		Vector3 _JohnPosition = JohnHandler.Get().transform.position;
+		float _HighestPoint = Camera.main.ViewportToWorldPoint(Vector3.zero).y;
+
+		for ( int i = 0; i< _Queue.Count; ++i )
+		{
+			if ( _Queue[i].transform.position.x > _JohnPosition.x || _Queue[i].transform.position.x + _Queue[i].renderer.bounds.extents.x * 2.0f < _JohnPosition.x )
+			{
+				continue;
+			}
+
+			float altitude_ = _Queue[i].transform.position.y + _Queue[i].renderer.bounds.extents.y * 0.3f;
+
+			_HighestPoint = Mathf.Max(_HighestPoint, altitude_);
+		}
+
+		_JohnPosition.y = _HighestPoint;
+
+		JohnHandler.Get().transform.position = _JohnPosition;
 	}
 
 	public static TextManager Get()
@@ -126,6 +150,8 @@ public class TextManager : MonoBehaviour
 
 	public void OnSentenceTrigger(Sentence source)
 	{
+
+
 		List<Sentence.NextSentence> _choicesList = new List<Sentence.NextSentence>(source._NextSentenceList);
 		
 		ScoreManager.Get().FilterChoices(_choicesList);
@@ -171,6 +197,7 @@ public class TextManager : MonoBehaviour
 
 	IEnumerator DisplayChoices(List<Sentence.NextSentence> choices)
 	{
+		JohnHandler.Get().DoAction(JohnHandler.Action.Stop);
 		List<Transform> _choicesPlaces = new List<Transform>(_ChoicePositions);
 
 		for ( int i = 0; i < Mathf.Min(3, choices.Count); ++i )
@@ -214,6 +241,7 @@ public class TextManager : MonoBehaviour
 
 	public void ChoiceSelected(Choice target)
 	{
+		JohnHandler.Get().DoAction(JohnHandler.Action.Run);
 		_ActualSentence.Leave();
 		ColorManager.Get().SetMood(target._parentSentence._Condition._ScoreType);
 		StartCoroutine(HideActualChoicesBut(target));
