@@ -7,6 +7,11 @@ TextureImporter:
     21300004: church
     21300006: girl
     21300008: cliffhouse
+    21300010: phone
+    21300012: cliff
+    21300014: cemetary
+    21300016: farm
+    21300018: ireland
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -62,9 +67,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1036
-        y: 1568
+        y: 1579
         width: 570
-        height: 480
+        height: 469
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -85,6 +90,56 @@ TextureImporter:
         y: 1210
         width: 1017
         height: 495
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: phone
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 1360
+        width: 347
+        height: 205
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cliff
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 1098
+        width: 340
+        height: 476
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cemetary
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 865
+        width: 934
+        height: 326
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: farm
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 825
+        width: 990
+        height: 281
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ireland
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 309
+        width: 825
+        height: 543
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
