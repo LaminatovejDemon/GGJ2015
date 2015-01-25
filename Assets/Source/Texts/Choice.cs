@@ -38,6 +38,11 @@ public class Choice : MonoBehaviour
 	{
 		for ( int i = 0; i < transform.childCount; ++i )
 		{
+			if ( transform.GetChild(i).GetComponent<TextMesh>() == null )
+			{
+				continue;
+			}
+
 			transform.GetChild(i).GetComponent<TextMesh>().text = label;
 		}
 	}
