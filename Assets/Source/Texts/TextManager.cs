@@ -81,15 +81,16 @@ public class TextManager : MonoBehaviour
 
 		if ( _Queue.Count == 1 )
 		{
-			if ( _BloodIntro.activeSelf )
-			{
-				_BloodIntro.transform.parent = _ActualSentence.transform;
-			}
+
 
 			if ( largeFont_ )
 			{
 				localPosition_.y -= 0.7f;
 				_ActualSentence.transform.localPosition = localPosition_;
+			}
+			if ( _BloodIntro.activeSelf )
+			{
+				_BloodIntro.transform.parent = _ActualSentence.transform;
 			}
 
 			return;
