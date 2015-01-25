@@ -6,7 +6,9 @@ public class TextManager : MonoBehaviour
 {
 	bool _EndGame = false;
 	bool _Initialised = false;
+	bool _InitCharacterShouldStop = false;
 
+	public ChapterManager _ChapterManagerTemplate;
 	public Choice _ChoiceTemplate;
 	public Font _FontTemplate;
 	public float _LargeFontSize;
@@ -15,6 +17,9 @@ public class TextManager : MonoBehaviour
 	public List<Choice> _VisibleChoices;
 	public List<Transform> _ChoicePositions;
 	public List<Sentence> _Queue = new List<Sentence>();
+
+
+	Vector3 _InitCharPostion;
 
 	Sentence _ActualSentence;
 	Sentence _ActualTemplate;
@@ -107,6 +112,11 @@ public class TextManager : MonoBehaviour
 		Sentence.NextSentence firstSentence = new Sentence.NextSentence();
 		firstSentence._Target = ChapterManager.Get().GetEpisode();
 
+		if ( !_InitCharacterShouldStop )
+		{
+			_InitCharPostion = JohnHandler.Get()._John.transform.position;
+		}
+
 		DisplayChoice(firstSentence);
 //		CreateSentence(ChapterManager.Get().GetEpisode(), 0, false);
 		_Initialised = true;
@@ -116,6 +126,28 @@ public class TextManager : MonoBehaviour
 	{
 		Initialise();
 		GetJohnSentence();
+
+		if ( _EndGame && Camera.main.WorldToViewportPoint(JohnHandler.Get()._John.transform.position).x > 2.0f )
+		{
+			Reset();
+		}
+		else if ( _InitCharacterShouldStop && JohnHandler.Get()._John.transform.position.x >= _InitCharPostion.x )
+		{
+			JohnHandler.Get().DoAction(JohnHandler.Action.Stop);
+			_InitCharacterShouldStop = false;
+		}
+	}
+
+	void Reset()
+	{
+		_Initialised = false;
+		_EndGame = false;
+		Vector3 charPos_ = _InitCharPostion;
+		charPos_.x = Camera.main.ViewportToWorldPoint(Vector3.left * 0.1f).x;
+		JohnHandler.Get()._John.transform.position = charPos_;
+		GameObject.Destroy(ChapterManager.Get().gameObject);
+		GameObject.Instantiate(_ChapterManagerTemplate);
+		_InitCharacterShouldStop = true;
 	}
 
 	public void GetJohnSentence()
@@ -258,7 +290,10 @@ public class TextManager : MonoBehaviour
 		if ( _ActualSentence != null )
 		{
 			_ActualSentence.Leave();
-			ColorManager.Get().SetMood(target._parentSentence._Condition._ScoreType);
+			if ( target._parentSentence._Condition != null )
+			{
+				ColorManager.Get().SetMood(target._parentSentence._Condition._ScoreType);
+			}
 		}
 
 		StartCoroutine(HideActualChoicesBut(target));

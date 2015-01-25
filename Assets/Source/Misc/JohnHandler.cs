@@ -84,6 +84,19 @@ public class JohnHandler : MonoBehaviour
 	{
 		if ( match == null )
 		{
+			if ( _PendingAction == Action.JumpDown )
+			{
+				DoAction(Action.JumpDownEnd);
+			}
+			else if ( _PendingAction == Action.JumpUp )
+			{
+				DoAction(Action.JumpUpEnd);
+			}
+			else if ( _PendingAction == Action.JumpDownEnd || _PendingAction == Action.JumpUpEnd )
+			{
+				DoAction(Action.Run);
+			}
+
 			return;
 		}
 
