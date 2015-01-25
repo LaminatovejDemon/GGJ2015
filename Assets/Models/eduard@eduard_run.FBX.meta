@@ -148,8 +148,6 @@ ModelImporter:
         weight: 1
       - path: Box01
         weight: 1
-      - path: Box02
-        weight: 1
       - path: Dummy01
         weight: 1
       - path: Dummy01/Bip01
@@ -227,6 +225,9 @@ ModelImporter:
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
           Head/Bip01 HeadNub
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          Head/Box02
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
           L Clavicle

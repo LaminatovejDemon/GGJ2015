@@ -134,9 +134,9 @@ ModelImporter:
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -145,7 +145,7 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
-      - path: Box02
+      - path: Box01
         weight: 1
       - path: Dummy01
         weight: 1
@@ -157,11 +157,15 @@ ModelImporter:
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatAL/Bip01 CoatAL02/Bip01 CoatAL03
         weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatAL/Bip01 CoatAL02/Bip01 CoatAL03/Bip01 CoatALNub
+        weight: 1
       - path: Dummy01/Bip01/Bip01 CoatAR
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatAR/Bip01 CoatAR02
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatAR/Bip01 CoatAR02/Bip01 CoatAR03
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatAR/Bip01 CoatAR02/Bip01 CoatAR03/Bip01 CoatARNub
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatBL
         weight: 1
@@ -169,11 +173,17 @@ ModelImporter:
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatBL/Bip01 CoatBL02/Bip01 CoatBL03
         weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatBL/Bip01 CoatBL02/Bip01 CoatBL03/Bip01 CoatBLNub
+        weight: 1
       - path: Dummy01/Bip01/Bip01 CoatBR
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatBR/Bip01 CoatBR02
         weight: 1
       - path: Dummy01/Bip01/Bip01 CoatBR/Bip01 CoatBR02/Bip01 CoatBR03
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 CoatBR/Bip01 CoatBR02/Bip01 CoatBR03/Bip01 CoatBRNub
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Footsteps
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis
         weight: 1
@@ -189,6 +199,9 @@ ModelImporter:
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 L Thigh/Bip01 L Calf/Bip01
           L Foot/Bip01 L Toe0
         weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 L Thigh/Bip01 L Calf/Bip01
+          L Foot/Bip01 L Toe0/Bip01 L Toe0Nub
+        weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh/Bip01 R Calf
@@ -199,12 +212,21 @@ ModelImporter:
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh/Bip01 R Calf/Bip01
           R Foot/Bip01 R Toe0
         weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 R Thigh/Bip01 R Calf/Bip01
+          R Foot/Bip01 R Toe0/Bip01 R Toe0Nub
+        weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
           Head
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          Head/Bip01 HeadNub
+        weight: 1
+      - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
+          Head/Box02
         weight: 1
       - path: Dummy01/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01
           L Clavicle

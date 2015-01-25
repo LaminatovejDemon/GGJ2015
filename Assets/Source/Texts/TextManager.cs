@@ -129,6 +129,7 @@ public class TextManager : MonoBehaviour
 	{
 		Initialise();
 		GetJohnSentence();
+		GetJohnSentence(7.0f);
 
 		if ( _EndGame && Camera.main.WorldToViewportPoint(JohnHandler.Get()._John.transform.position).x > 2.0f )
 		{
@@ -157,9 +158,10 @@ public class TextManager : MonoBehaviour
 		_InitCharacterShouldStop = true;
 	}
 
-	public void GetJohnSentence()
+	public void GetJohnSentence(float distanceForward = 0)
 	{
-		Vector3 _JohnPosition = JohnHandler.Get()._John.transform.position;
+		Vector3 _JohnPosition = JohnHandler.Get()._John.transform.position + Vector3.right * distanceForward;
+
 		float _HighestPoint = Camera.main.ViewportToWorldPoint(Vector3.zero).y;
 		Sentence match_ = null;
 
@@ -179,7 +181,14 @@ public class TextManager : MonoBehaviour
 			}
 		}
 
-		JohnHandler.Get().SetYPosition(_HighestPoint, match_);
+		if ( distanceForward > 0 )
+		{
+			JohnHandler.Get().SetYPositionForward(_HighestPoint, match_);
+		}
+		else
+		{
+			JohnHandler.Get().SetYPosition(_HighestPoint, match_);
+		}
 	}
 
 	public static TextManager Get()

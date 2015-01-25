@@ -84,7 +84,7 @@ public class JohnHandler : MonoBehaviour
 		_PendingAction = type;
 	}
 
-	public void SetYPosition(float yPosition, Sentence match)
+	public void SetYPositionForward(float yPosition, Sentence match)
 	{
 		if ( match == null )
 		{
@@ -92,11 +92,36 @@ public class JohnHandler : MonoBehaviour
 			{
 				DoAction(Action.JumpDownEnd);
 			}
-			else if ( _PendingAction == Action.JumpUp )
+			else if (_PendingAction == Action.JumpDownEnd )
+			{
+				DoAction(Action.Run);
+			}
+			return;
+		}
+
+		Vector3 johnPosition_ = _John.transform.position;
+
+		if ( _PendingAction != Action.JumpDown && yPosition < johnPosition_.y - 0.22f)
+		{
+			DoAction(Action.JumpDown);
+		}
+		if ( _PendingAction == Action.JumpDown && yPosition > johnPosition_.y - 0.22f )
+		{
+			johnPosition_.y = yPosition;
+			DoAction(Action.JumpDownEnd);
+			_John.transform.position = johnPosition_;	
+		}
+	}
+
+	public void SetYPosition(float yPosition, Sentence match)
+	{
+		if ( match == null )
+		{
+			if ( _PendingAction == Action.JumpUp )
 			{
 				DoAction(Action.JumpUpEnd);
 			}
-			else if ( _PendingAction == Action.JumpDownEnd || _PendingAction == Action.JumpUpEnd )
+			else if ( _PendingAction == Action.JumpUpEnd )
 			{
 				DoAction(Action.Run);
 			}
@@ -112,23 +137,13 @@ public class JohnHandler : MonoBehaviour
 			DoAction(Action.JumpUpEnd);
 			_John.transform.position = johnPosition_;
 		}
-		else if ( _PendingAction == Action.JumpDown && yPosition > johnPosition_.y - 0.22f )
-		{
-			johnPosition_.y = yPosition;
-			DoAction(Action.JumpDownEnd);
-			_John.transform.position = johnPosition_;	
-		}
 
-		if  ( yPosition > johnPosition_.y + 0.22f && _PendingAction != Action.JumpUp) 
+		if  ( yPosition > johnPosition_.y + 0.22f && (_PendingAction == Action.Run || _PendingAction == Action.Walk)) 
 		{
 			DoAction(Action.JumpUp);
 		}
-		else if ( yPosition < johnPosition_.y - 0.22f && _PendingAction != Action.JumpDown)
-		{
 
-			DoAction(Action.JumpDown);
-		}
-		else 
+		if ( _PendingAction == Action.Walk || _PendingAction == Action.Walk || _PendingAction == Action.Stop ) 
 		{
 			johnPosition_.x -= match.GetActualSpeed() * Time.deltaTime * _CharacterSpeedMultiplier;
 			_John.transform.position = johnPosition_;
