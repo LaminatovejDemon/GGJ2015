@@ -104,7 +104,11 @@ public class TextManager : MonoBehaviour
 			return;
 		}
 	
-		CreateSentence(ChapterManager.Get().GetEpisode(), 0, false);
+		Sentence.NextSentence firstSentence = new Sentence.NextSentence();
+		firstSentence._Target = ChapterManager.Get().GetEpisode();
+
+		DisplayChoice(firstSentence);
+//		CreateSentence(ChapterManager.Get().GetEpisode(), 0, false);
 		_Initialised = true;
 	}
 
@@ -172,14 +176,23 @@ public class TextManager : MonoBehaviour
 		}
 	}
 
-	void DisplayChoice(Sentence.NextSentence item, List<Transform> placesList)
+	void DisplayChoice(Sentence.NextSentence item, List<Transform> placesList = null)
 	{
 		Choice choiceInstance_ = GameObject.Instantiate(_ChoiceTemplate) as Choice;
-		choiceInstance_.transform.position = Vector3.zero;
-		choiceInstance_.SetText(item._Target.name);
-		
-		choiceInstance_.transform.parent = GetChoicePosition(placesList);
-		choiceInstance_.transform.localPosition = Vector3.zero;
+
+		if ( placesList != null )
+		{
+			choiceInstance_.transform.parent = GetChoicePosition(placesList);
+			choiceInstance_.SetText(item._Target.name);
+
+			choiceInstance_.transform.localPosition = Vector3.zero;
+		}
+		else
+		{
+			choiceInstance_.SetText("Mean While");
+			choiceInstance_.transform.localPosition = Vector3.up * 1.42f;
+		}
+
 		
 		choiceInstance_.gameObject.AddComponent<BoxCollider>();
 		choiceInstance_.GetComponent<BoxCollider>().center = Vector3.zero;
@@ -241,9 +254,13 @@ public class TextManager : MonoBehaviour
 
 	public void ChoiceSelected(Choice target)
 	{
-		JohnHandler.Get().DoAction(JohnHandler.Action.Run);
-		_ActualSentence.Leave();
-		ColorManager.Get().SetMood(target._parentSentence._Condition._ScoreType);
+		JohnHandler.Get().DoAction(JohnHandler.Action.Walk);
+		if ( _ActualSentence != null )
+		{
+			_ActualSentence.Leave();
+			ColorManager.Get().SetMood(target._parentSentence._Condition._ScoreType);
+		}
+
 		StartCoroutine(HideActualChoicesBut(target));
 		target.GetComponent<Animator>().SetBool("Select", true);
 		CreateSentence(target._parentSentence._Target, 0, true);

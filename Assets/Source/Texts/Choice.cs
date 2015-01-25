@@ -26,7 +26,10 @@ public class Choice : MonoBehaviour
 		    (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ChoiceIdle")) ||
 		 	(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ChoiceShow")) )
 		{
-			ScoreManager.Get().AddScore(_parentSentence._Condition._ConditionType);
+			if (_parentSentence._Condition != null )
+			{
+				ScoreManager.Get().AddScore(_parentSentence._Condition._ConditionType);
+			}
 			TextManager.Get().ChoiceSelected(this);
 		}
 	}

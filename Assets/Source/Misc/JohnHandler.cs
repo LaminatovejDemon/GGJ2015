@@ -115,11 +115,13 @@ public class JohnHandler : MonoBehaviour
 		}
 
 
-		if ( Camera.main.WorldToViewportPoint(johnPosition_).x < 0.2f && _PendingAction == Action.Walk )
+		if ( Camera.main.WorldToViewportPoint(johnPosition_).x < 0.2f && 
+		    (_PendingAction == Action.Walk || _PendingAction == Action.JumpDownEnd || _PendingAction == Action.JumpUpEnd) )
 		{
 			DoAction(Action.Run);
 		}
-		else if ( Camera.main.WorldToViewportPoint(johnPosition_).x > 0.8f && _PendingAction == Action.Run)
+		else if ( Camera.main.WorldToViewportPoint(johnPosition_).x > 0.8f && 
+		         (_PendingAction == Action.Run || _PendingAction == Action.JumpDownEnd || _PendingAction == Action.JumpUpEnd) )
 		{
 			DoAction(Action.Walk);
 		}
