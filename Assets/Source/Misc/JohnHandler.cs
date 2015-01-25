@@ -99,17 +99,24 @@ public class JohnHandler : MonoBehaviour
 			return;
 		}
 
+		if ( _PendingAction == Action.JumpUp )
+		{
+			return;
+		}
+
 		Vector3 johnPosition_ = _John.transform.position;
 
-		if ( _PendingAction != Action.JumpDown && yPosition < johnPosition_.y - 0.22f)
+		if ( _PendingAction != Action.JumpDown && yPosition < johnPosition_.y - 0.5f)
 		{
 			DoAction(Action.JumpDown);
 		}
-		if ( _PendingAction == Action.JumpDown && yPosition > johnPosition_.y - 0.22f )
+		if ( _PendingAction == Action.JumpDown && yPosition > johnPosition_.y - 0.5f )
 		{
 			johnPosition_.y = yPosition;
 			DoAction(Action.JumpDownEnd);
-			_John.transform.position = johnPosition_;	
+
+			_John.transform.localPosition = johnPosition_;	
+			Debug.Log ("_John 3: " + _John.transform.localPosition);
 		}
 	}
 
@@ -129,13 +136,23 @@ public class JohnHandler : MonoBehaviour
 			return;
 		}
 
+		if ( _PendingAction == Action.JumpDown )
+		{
+			return;
+		}
+
 		Vector3 johnPosition_ = _John.transform.position;
 
-		if ( _PendingAction == Action.JumpUp && yPosition < johnPosition_.y + 0.22f )
+		if ( _PendingAction == Action.JumpUp )
 		{
-			johnPosition_.y = yPosition;
-			DoAction(Action.JumpUpEnd);
-			_John.transform.position = johnPosition_;
+			if ( yPosition < johnPosition_.y + 0.22f )
+			{
+				johnPosition_.y = yPosition;
+				DoAction(Action.JumpUpEnd);
+				_John.transform.localPosition = johnPosition_;
+				Debug.Log ("_John 1: " + _John.transform.localPosition);
+			}
+			return;
 		}
 
 		if  ( yPosition > johnPosition_.y + 0.22f && (_PendingAction == Action.Run || _PendingAction == Action.Walk)) 
@@ -143,10 +160,9 @@ public class JohnHandler : MonoBehaviour
 			DoAction(Action.JumpUp);
 		}
 
-		if ( _PendingAction == Action.Walk || _PendingAction == Action.Walk || _PendingAction == Action.Stop ) 
+//		if ( _PendingAction == Action.Walk || _PendingAction == Action.Run || _PendingAction == Action.Stop ) 
 		{
-			johnPosition_.x -= match.GetActualSpeed() * Time.deltaTime * _CharacterSpeedMultiplier;
-			_John.transform.position = johnPosition_;
+			_John.transform.localPosition += Vector3.left * match.GetActualSpeed() * Time.deltaTime * _CharacterSpeedMultiplier;
 		}
 
 
@@ -160,7 +176,7 @@ public class JohnHandler : MonoBehaviour
 		{
 			DoAction(Action.Walk);
 		}
-		else if ( Camera.main.WorldToViewportPoint(johnPosition_).x > 0.5f && _ShouldStop && 
+		else if ( Camera.main.WorldToViewportPoint(johnPosition_).x > 0.5f && (_ShouldStop || TextManager.Get()._ChoicesAreDisplayed ) && 
 		         (_PendingAction == Action.Run || _PendingAction == Action.Walk || _PendingAction == Action.JumpDownEnd || _PendingAction == Action.JumpUpEnd ) )
 		{
 			DoAction(Action.Stop);
