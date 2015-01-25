@@ -53,7 +53,7 @@ public class Sentence : MonoBehaviour
 
 	public float GetActualSpeed()
 	{
-		return 5.0f * _RealSpeed * _Speed;
+		return 5.0f * _RealSpeed * _Speed * TextManager.Get()._TextSpeedMultiplier;
 	}
 	
 	void Update()
@@ -77,7 +77,7 @@ public class Sentence : MonoBehaviour
 			_RealSpeed = _MaxSpeed;
 		}
 	
-		transform.localPosition += Vector3.left * Time.deltaTime * 5.0f * _RealSpeed * _Speed;
+		transform.localPosition += Vector3.left * Time.deltaTime * GetActualSpeed();
 
 		if ( _SentencePhase == SentencePhase.Pending && Camera.main.WorldToViewportPoint(endSentenceWorldPoint_).x < 1.5f )
 		{
