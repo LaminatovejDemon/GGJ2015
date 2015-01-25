@@ -146,7 +146,7 @@ public class TextManager : MonoBehaviour
 			}
 			else
 			{
-				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y + ((Random.Range(0,2) * 2.0f)-1) * 2.7f;
+				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y +/* ((Random.Range(0,2) * 2.0f)-1) */ 2.7f;
 			}
 		}
 
