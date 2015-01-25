@@ -39,7 +39,7 @@ public class InputController : MonoBehaviour
 	void Update()
 	{
 
-		#if UNITY_EDITOR || UNITY_STANDALONE_OSX
+		#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
 		if ( Input.GetMouseButtonDown(0) )
 		{
 			TouchBegan(0, Input.mousePosition);
