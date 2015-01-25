@@ -5,11 +5,15 @@ using System.Collections.Generic;
 public class TextManager : MonoBehaviour 
 {
 	bool _EndGame = false;
+	bool _PreEndGame = false;
 	bool _Initialised = false;
 	bool _InitCharacterShouldStop = false;
 	public bool _ChoicesAreDisplayed {private set; get;}
 	public GameObject _BloodIntro;
+	[HideInInspector]
 	public Vector3 _BloodIntroPosition;
+
+	public Sentence _Endings;
 
 	public ChapterManager _ChapterManagerTemplate;
 	public Choice _ChoiceTemplate;
@@ -17,8 +21,10 @@ public class TextManager : MonoBehaviour
 	public float _LargeFontSize;
 	public float _SmallFontSize;
 	public float _TextSpeedMultiplier = 1.0f;
+	[HideInInspector]
 	public List<Choice> _VisibleChoices;
 	public List<Transform> _ChoicePositions;
+	[HideInInspector]
 	public List<Sentence> _Queue = new List<Sentence>();
 
 
@@ -45,15 +51,32 @@ public class TextManager : MonoBehaviour
 	{
 		if ( targetTemplate == null )
 		{
-			_EndGame = true;
-			return;
+			if (_EndGame == false && _PreEndGame == false)
+			{
+				ScoreManager.ScoreType maxType = ScoreManager.Get().GetHighestScoreType();
+
+				for ( int i = 0; i < (int)ScoreManager.ScoreType.Count; ++i )
+				{
+					if ( maxType == _Endings._NextSentenceList[i]._Condition._ScoreType )
+					{
+						targetTemplate = _Endings._NextSentenceList[i]._Target;
+						break;
+					}
+				}
+				_PreEndGame = true;
+			}
+			else if ( _EndGame == false )
+			{
+				_EndGame = true;
+				return;
+			}
 		}
 
 		_ActualTemplate = targetTemplate;
 		_ActualSentence = GameObject.Instantiate(targetTemplate) as Sentence;
 		if ( targetTemplate._Image != null )
 		{
-			Transform image_ = GameObject.Instantiate(targetTemplate._Image) as Transform;
+			GameObject.Instantiate(targetTemplate._Image);
 		}
 
 
@@ -147,6 +170,7 @@ public class TextManager : MonoBehaviour
 			return;
 		}
 	
+		_PreEndGame = false;
 		_ChoicesAreDisplayed = false;
 		if ( !_InitCharacterShouldStop )
 		{
@@ -166,6 +190,13 @@ public class TextManager : MonoBehaviour
 		_Initialised = true;
 	}
 
+	float _LastEndTimeStamp;
+
+	void EndGame()
+	{
+			
+	}
+
 	void Update()
 	{
 		Initialise();
@@ -175,6 +206,10 @@ public class TextManager : MonoBehaviour
 		if ( _EndGame && Camera.main.WorldToViewportPoint(JohnHandler.Get()._John.transform.position).x > 2.0f )
 		{
 			Reset();
+		}
+		else if ( _EndGame )
+		{
+			EndGame();
 		}
 		else if ( _InitCharacterShouldStop && JohnHandler.Get()._John.transform.position.x >= _InitCharPostion.x )
 		{

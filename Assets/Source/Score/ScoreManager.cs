@@ -52,6 +52,27 @@ public class ScoreManager : MonoBehaviour
 		return _Instance;
 	}
 
+	public ScoreType GetHighestScoreType()
+	{
+		if ( _Scores == null )
+		{
+			return ScoreType.Protective;
+		}
+
+		int max_ = 0;
+		ScoreType maxType_ = ScoreType.Protective;
+
+		for ( int i = 0; i < _Scores.Length; ++i )
+		{
+			if ( _Scores[i] > max_ )
+			{
+				max_ = _Scores[i];
+				maxType_ = (ScoreType)i;
+			}
+		}
+		return maxType_;
+	}
+
 	public void AddScore(ConditionType conditionMask)
 	{
 		if ( conditionMask <= 0 )
