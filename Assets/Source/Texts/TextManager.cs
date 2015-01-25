@@ -9,6 +9,7 @@ public class TextManager : MonoBehaviour
 	bool _InitCharacterShouldStop = false;
 	public bool _ChoicesAreDisplayed {private set; get;}
 	public GameObject _BloodIntro;
+	public Vector3 _BloodIntroPosition;
 
 	public ChapterManager _ChapterManagerTemplate;
 	public Choice _ChoiceTemplate;
@@ -32,6 +33,11 @@ public class TextManager : MonoBehaviour
 
 	public void OnSentenceEnd(Sentence source)
 	{
+		if ( _BloodIntro.activeSelf )
+		{
+			_BloodIntro.SetActive(false);
+			_BloodIntro.transform.parent = null;
+		}
 		_Queue.Remove(source);
 	}
 
@@ -45,6 +51,10 @@ public class TextManager : MonoBehaviour
 
 		_ActualTemplate = targetTemplate;
 		_ActualSentence = GameObject.Instantiate(targetTemplate) as Sentence;
+
+
+
+
 		_ActualSentence.transform.parent = transform;
 		_ActualSentence.transform.localPosition = Vector3.zero;
 		_Queue.Add(_ActualSentence);
@@ -71,6 +81,11 @@ public class TextManager : MonoBehaviour
 
 		if ( _Queue.Count == 1 )
 		{
+			if ( _BloodIntro.activeSelf )
+			{
+				_BloodIntro.transform.parent = _ActualSentence.transform;
+			}
+
 			if ( largeFont_ )
 			{
 				localPosition_.y -= 0.7f;
@@ -132,9 +147,11 @@ public class TextManager : MonoBehaviour
 		if ( !_InitCharacterShouldStop )
 		{
 			_InitCharPostion = JohnHandler.Get()._John.transform.position;
+			_BloodIntroPosition = _BloodIntro.transform.position;
 			_InitCharacterShouldStop = true;
 		}
 		_BloodIntro.SetActive(true);
+		_BloodIntro.transform.position = _BloodIntroPosition;
 		Vector3 charPos_ = _InitCharPostion;
 		charPos_.x = Camera.main.ViewportToWorldPoint(Vector3.left * 0.1f).x;
 		JohnHandler.Get()._John.transform.position = charPos_;
@@ -334,10 +351,6 @@ public class TextManager : MonoBehaviour
 			}
 		}
 
-		if ( _BloodIntro.activeSelf )
-		{
-			_BloodIntro.SetActive(false);
-		}
 
 
 		StartCoroutine(HideActualChoicesBut(target));
