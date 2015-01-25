@@ -35,6 +35,8 @@ public class SentenceEditor : Editor
 	{
 		UpdateBegin();
 //		base.OnInspectorGUI ();
+		EditorGUILayout.LabelField("Icon");
+		m_Data._Image = EditorGUILayout.ObjectField(m_Data._Image, typeof(Transform), false) as Transform;
 
 		EditorGUILayout.LabelField("Sentences");
 		for ( int i = 0; i < m_Data._Labels.Count; ++i )

@@ -51,7 +51,10 @@ public class TextManager : MonoBehaviour
 
 		_ActualTemplate = targetTemplate;
 		_ActualSentence = GameObject.Instantiate(targetTemplate) as Sentence;
-
+		if ( targetTemplate._Image != null )
+		{
+			Transform image_ = GameObject.Instantiate(targetTemplate._Image) as Transform;
+		}
 
 
 
