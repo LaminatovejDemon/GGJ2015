@@ -53,10 +53,14 @@ public class Sentence : MonoBehaviour
 	
 	void Update()
 	{
+		Vector3 endSentenceWorldPoint_ = 
+			transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f);                                                          
+
 		if ( _SentencePhase == SentencePhase.WaitingForInteraction && _RealSpeed > 0 )
 		{
-			_RealSpeed -= Time.deltaTime;
-			_RealSpeed = Mathf.Max(_RealSpeed, 0);
+			_RealSpeed = Mathf.Clamp(_RealSpeed, 0, (endSentenceWorldPoint_.x - Camera.main.ViewportToWorldPoint(Vector3.one * 0.8f).x) * 0.25f);
+//			_RealSpeed -= Time.deltaTime;
+//			_RealSpeed = Mathf.Max(_RealSpeed, 0);
 		}
 		else if ( _SentencePhase == SentencePhase.Leaving && _RealSpeed < _MaxSpeed )
 		{
@@ -70,21 +74,14 @@ public class Sentence : MonoBehaviour
 	
 		transform.localPosition += Vector3.left * Time.deltaTime * 5.0f * _RealSpeed * _Speed;
 
-		float lastSpeedRatio_ = _MaxSpeed;
-		Sentence previous_ = TextManager.Get()._PreviousInstance;
-		if ( previous_ != null )
-		{
-			lastSpeedRatio_ = _MaxSpeed / previous_._MaxSpeed;
-		}
-		
-		if ( _SentencePhase == SentencePhase.Pending && Camera.main.WorldToViewportPoint(transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f)).x
-		    < lastSpeedRatio_ )
+		if ( _SentencePhase == SentencePhase.Pending && Camera.main.WorldToViewportPoint(endSentenceWorldPoint_).x < 1.5f )
 		{
 			_SentencePhase = SentencePhase.WaitingForInteraction;
 			TextManager.Get().OnSentenceTrigger(this);
 		}
 		else if ( _SentencePhase == SentencePhase.Leaving && Camera.main.WorldToViewportPoint(transform.position + Vector3.right * ( renderer.bounds.extents.x * 2.0f)).x < 0.0f )
 		{
+			TextManager.Get().OnSentenceEnd(this);
 			GameObject.Destroy(gameObject);
 		}
 	}	

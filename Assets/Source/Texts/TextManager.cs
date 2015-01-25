@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class TextManager : MonoBehaviour 
 {
 	bool _EndGame = false;
+	bool _Initialised = false;
 
 	public Choice _ChoiceTemplate;
 	public Font _FontTemplate;
@@ -13,15 +14,19 @@ public class TextManager : MonoBehaviour
 	public float _TextSpeedMultiplier = 1.0f;
 	public List<Choice> _VisibleChoices;
 	public List<Transform> _ChoicePositions;
-
-	int _Row = 0;
+	public List<Sentence> _Queue = new List<Sentence>();
 
 	Sentence _ActualSentence;
 	Sentence _ActualTemplate;
-	public Sentence _PreviousInstance {get; private set;}
+
 	int _ActualSentencePartIndex;
 
 	private static TextManager _Instance;
+
+	public void OnSentenceEnd(Sentence source)
+	{
+		_Queue.Remove(source);
+	}
 
 	void CreateSentence(Sentence targetTemplate, int index, bool raiseSpeed, bool changeLine = true)
 	{
@@ -31,9 +36,11 @@ public class TextManager : MonoBehaviour
 			return;
 		}
 
-		_PreviousInstance = _ActualSentence;
 		_ActualTemplate = targetTemplate;
 		_ActualSentence = GameObject.Instantiate(targetTemplate) as Sentence;
+		_ActualSentence.transform.parent = transform;
+		_ActualSentence.transform.localPosition = Vector3.zero;
+		_Queue.Add(_ActualSentence);
 		TextMesh text_ = _ActualSentence.gameObject.AddComponent<TextMesh>();
 		text_.font = _FontTemplate;
 		_ActualSentencePartIndex = index;
@@ -46,13 +53,6 @@ public class TextManager : MonoBehaviour
 		text_.color = Color.black;
 
 		_ActualSentence.GetComponent<MeshRenderer>().material = _FontTemplate.material;
-		_ActualSentence.transform.parent = transform;
-
-		if ( _PreviousInstance == null)
-		{
-			return;
-		}
-
 
 
 		if ( raiseSpeed )
@@ -60,36 +60,57 @@ public class TextManager : MonoBehaviour
 			_ActualSentence._MaxSpeed = 2.0f;
 		}
 
-		float previousY_ = _PreviousInstance.transform.position.y;
 		Vector3 localPosition_ = _ActualSentence.transform.localPosition;
 
-		if ( !changeLine )
+		if ( _Queue.Count == 1 )
 		{
-			localPosition_.y = previousY_;
-			_ActualSentence._MaxSpeed = _PreviousInstance._MaxSpeed;
+			return;
 		}
-		else if ( previousY_ <= -2.5f )
+
+		Vector3 previousEndWorldPoint_ = _Queue[_Queue.Count-2].transform.localPosition + _Queue[_Queue.Count-2].renderer.bounds.extents * 2.0f;
+
+		localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y;
+		localPosition_.x = Mathf.Max(localPosition_.x, previousEndWorldPoint_.x + 0.5f);
+//		localPosition_.x = _Queue[_Queue.Count-2].transform.localPosition.x + _Queue[_Queue.Count-2].transform.renderer.bounds.extents.x * 2.0f;
+
+		if ( !raiseSpeed )
 		{
-			localPosition_.y = previousY_ + 2.5f;
+			_ActualSentence._MaxSpeed = _Queue[_Queue.Count-2]._MaxSpeed;
 		}
-		else if ( previousY_ >= 2.5f )
+
+		if ( changeLine )
 		{
-			localPosition_.y = previousY_ - 2.5f;
-		}
-		else
-		{
-			localPosition_.y = previousY_ + ((Random.Range(0,2) * 2.0f)-1) * 2.5f;
+	 		if ( _Queue[_Queue.Count-2].transform.localPosition.y <= -2.5f )
+			{
+				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y + 2.5f;
+			}
+			else if ( _Queue[_Queue.Count-2].transform.localPosition.y >= 2.5f )
+			{
+				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y - 2.5f;
+			}
+			else
+			{
+				localPosition_.y = _Queue[_Queue.Count-2].transform.localPosition.y + ((Random.Range(0,2) * 2.0f)-1) * 2.5f;
+			}
 		}
 		_ActualSentence.transform.localPosition = localPosition_;
 		
 	}
 
+	void Initialise()
+	{
+		if ( _Initialised )
+		{
+			return;
+		}
+	
+		CreateSentence(ChapterManager.Get().GetEpisode(), 0, false);
+		_Initialised = true;
+	}
+
 	void Update()
 	{
-		if ( _ActualSentence == null && _EndGame != true )
-		{
-			CreateSentence(ChapterManager.Get().GetEpisode(), 0, false);
-		}
+		Initialise();
 	}
 
 	public static TextManager Get()
@@ -112,14 +133,7 @@ public class TextManager : MonoBehaviour
 		if ( _ActualSentence._Labels.Count > _ActualSentencePartIndex + 1)
 		{
 			source.Leave();
-			if ( _ActualSentencePartIndex == 0 )
-			{
-				CreateSentence(_ActualTemplate, _ActualSentencePartIndex+1, false, false);
-			}
-			else
-			{
-				CreateSentence(_ActualTemplate, _ActualSentencePartIndex+1, false);
-			}
+			CreateSentence(_ActualTemplate, _ActualSentencePartIndex+1, false, false);
 		}
 		else if ( _choicesList.Count == 0 )
 		{
