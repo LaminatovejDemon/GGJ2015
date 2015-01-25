@@ -116,9 +116,9 @@ public class TextManager : MonoBehaviour
 
 	public void GetJohnSentence()
 	{
-
-		Vector3 _JohnPosition = JohnHandler.Get().transform.position;
+		Vector3 _JohnPosition = JohnHandler.Get()._John.transform.position;
 		float _HighestPoint = Camera.main.ViewportToWorldPoint(Vector3.zero).y;
+		bool noMatch_ = true;
 
 		for ( int i = 0; i< _Queue.Count; ++i )
 		{
@@ -127,14 +127,20 @@ public class TextManager : MonoBehaviour
 				continue;
 			}
 
+			noMatch_ = false;
 			float altitude_ = _Queue[i].transform.position.y + _Queue[i].renderer.bounds.extents.y * 0.3f;
 
 			_HighestPoint = Mathf.Max(_HighestPoint, altitude_);
 		}
 
+		if ( noMatch_ )
+		{
+			return;
+		}
+
 		_JohnPosition.y = _HighestPoint;
 
-		JohnHandler.Get().transform.position = _JohnPosition;
+		JohnHandler.Get().SetYPosition(_HighestPoint);
 	}
 
 	public static TextManager Get()
@@ -150,8 +156,6 @@ public class TextManager : MonoBehaviour
 
 	public void OnSentenceTrigger(Sentence source)
 	{
-
-
 		List<Sentence.NextSentence> _choicesList = new List<Sentence.NextSentence>(source._NextSentenceList);
 		
 		ScoreManager.Get().FilterChoices(_choicesList);
