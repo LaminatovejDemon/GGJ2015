@@ -8,6 +8,7 @@ public class TextManager : MonoBehaviour
 	bool _Initialised = false;
 	bool _InitCharacterShouldStop = false;
 	public bool _ChoicesAreDisplayed {private set; get;}
+	public GameObject _BloodIntro;
 
 	public ChapterManager _ChapterManagerTemplate;
 	public Choice _ChoiceTemplate;
@@ -133,6 +134,7 @@ public class TextManager : MonoBehaviour
 			_InitCharPostion = JohnHandler.Get()._John.transform.position;
 			_InitCharacterShouldStop = true;
 		}
+		_BloodIntro.SetActive(true);
 		Vector3 charPos_ = _InitCharPostion;
 		charPos_.x = Camera.main.ViewportToWorldPoint(Vector3.left * 0.1f).x;
 		JohnHandler.Get()._John.transform.position = charPos_;
@@ -331,6 +333,12 @@ public class TextManager : MonoBehaviour
 				ColorManager.Get().SetMood(target._parentSentence._Condition._ScoreType);
 			}
 		}
+
+		if ( _BloodIntro.activeSelf )
+		{
+			_BloodIntro.SetActive(false);
+		}
+
 
 		StartCoroutine(HideActualChoicesBut(target));
 		target.GetComponent<Animator>().SetBool("Select", true);
