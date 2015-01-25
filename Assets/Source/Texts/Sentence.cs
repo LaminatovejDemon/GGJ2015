@@ -24,6 +24,8 @@ public class Sentence : MonoBehaviour
 		public Condition _Condition;
 	}
 
+	public Transform _Image;
+
 	[SerializeField]
 	public List<string> _Labels;
 	public List<bool> _LargeLabels;
