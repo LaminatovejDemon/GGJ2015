@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
+
 public class JohnHandler : MonoBehaviour 
 {
 	public float _CharacterSpeedMultiplier = 1.0f;
@@ -68,10 +70,12 @@ public class JohnHandler : MonoBehaviour
 				_John.SetBool("JumpDown", true);
 			}
 			break;
+
 		case Action.JumpUpEnd:
 			_John.SetBool("JumpUp", false);
 			_John.SetBool("AfterJumpFloorImpact", true);
 			break;
+
 		case Action.JumpDownEnd:
 			_John.SetBool("JumpDown", false);
 			_John.SetBool("AfterJumpFloorImpact", true);
@@ -102,23 +106,26 @@ public class JohnHandler : MonoBehaviour
 
 		Vector3 johnPosition_ = _John.transform.position;
 
-		if ( _PendingAction == Action.JumpUp && yPosition < johnPosition_.y )
+		if ( _PendingAction == Action.JumpUp && yPosition < johnPosition_.y + 0.22f )
 		{
+			johnPosition_.y = yPosition;
 			DoAction(Action.JumpUpEnd);
 			_John.transform.position = johnPosition_;
 		}
-		else if ( _PendingAction == Action.JumpDown && yPosition > johnPosition_.y )
+		else if ( _PendingAction == Action.JumpDown && yPosition > johnPosition_.y - 0.22f )
 		{
+			johnPosition_.y = yPosition;
 			DoAction(Action.JumpDownEnd);
 			_John.transform.position = johnPosition_;	
 		}
 
-		if  ( yPosition > johnPosition_.y + 0.5f )
+		if  ( yPosition > johnPosition_.y + 0.22f && _PendingAction != Action.JumpUp) 
 		{
 			DoAction(Action.JumpUp);
 		}
-		else if ( yPosition < johnPosition_.y - 0.5f )
+		else if ( yPosition < johnPosition_.y - 0.22f && _PendingAction != Action.JumpDown)
 		{
+
 			DoAction(Action.JumpDown);
 		}
 		else 
