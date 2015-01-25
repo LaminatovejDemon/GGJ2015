@@ -109,15 +109,18 @@ public class TextManager : MonoBehaviour
 			return;
 		}
 	
-		Sentence.NextSentence firstSentence = new Sentence.NextSentence();
-		firstSentence._Target = ChapterManager.Get().GetEpisode();
 
 		if ( !_InitCharacterShouldStop )
 		{
 			_InitCharPostion = JohnHandler.Get()._John.transform.position;
+			_InitCharacterShouldStop = true;
 		}
+		Vector3 charPos_ = _InitCharPostion;
+		charPos_.x = Camera.main.ViewportToWorldPoint(Vector3.left * 0.1f).x;
+		JohnHandler.Get()._John.transform.position = charPos_;
+		JohnHandler.Get().DoAction(JohnHandler.Action.Run);
 
-		DisplayChoice(firstSentence);
+
 //		CreateSentence(ChapterManager.Get().GetEpisode(), 0, false);
 		_Initialised = true;
 	}
@@ -135,6 +138,10 @@ public class TextManager : MonoBehaviour
 		{
 			JohnHandler.Get().DoAction(JohnHandler.Action.Stop);
 			_InitCharacterShouldStop = false;
+
+			Sentence.NextSentence firstSentence = new Sentence.NextSentence();
+			firstSentence._Target = ChapterManager.Get().GetEpisode();
+			DisplayChoice(firstSentence);
 		}
 	}
 
